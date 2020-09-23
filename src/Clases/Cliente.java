@@ -5,7 +5,7 @@ public class Cliente extends Actor {
 	private String apellido;
 	private String nombres;
 	private int dni;
-
+//prueba
 //Constructor
 	public Cliente(String apellido, String nombres, int dni) {
 	this.apellido = apellido;
