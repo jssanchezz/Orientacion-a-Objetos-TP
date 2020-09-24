@@ -30,5 +30,9 @@ public class Ubicacion {
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
+<<<<<<< HEAD
 //ANDAAAAAAAAAAAA
+=======
+// Fedeeeeeeeeeeeeeeeee
+>>>>>>> master
 }
