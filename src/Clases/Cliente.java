@@ -3,13 +3,17 @@ package Clases;
 //Editado
 
 public class Cliente extends Actor {
-//Atributos
+
+	//Atributos
+	
 	private String apellido;
 	private String nombres;
 	private int dni;
 
-//Constructor
-	public Cliente(String apellido, String nombres, int dni) {
+	//Constructor
+	
+	public Cliente(int id, Contacto contacto, String apellido, String nombres, int dni) {
+		super(id, contacto);
 	this.apellido = apellido;
 	this.nombres = nombres;
 	this.dni = dni;
