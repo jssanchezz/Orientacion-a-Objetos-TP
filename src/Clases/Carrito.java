@@ -97,5 +97,9 @@ public class Carrito {
 		this.entrega = entrega;
 	}
 	
+	//metodos de clase
+	
+	
+	
 
 }

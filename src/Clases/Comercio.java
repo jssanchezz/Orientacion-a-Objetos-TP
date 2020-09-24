@@ -119,6 +119,6 @@ public class Comercio extends Actor{
 	
 	//Metodos de clase
 	
-	
+	//METODO CON IMPLEMENTACION
 
 }

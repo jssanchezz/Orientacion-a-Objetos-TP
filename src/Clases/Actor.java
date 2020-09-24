@@ -30,5 +30,6 @@ public abstract class Actor {
 		this.contacto = contacto;
 	}
 	
+	//FIRMA METODO SIN IMPLEMENTAR
 	
 }
