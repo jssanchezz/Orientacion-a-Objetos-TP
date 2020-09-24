@@ -1,5 +1,7 @@
 package Clases;
 
+//Editado
+
 public class Cliente extends Actor {
 //Atributos
 	private String apellido;
