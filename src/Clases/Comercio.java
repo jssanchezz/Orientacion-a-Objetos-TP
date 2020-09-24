@@ -3,7 +3,7 @@ package Clases;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Comercio {
+public class Comercio extends Actor{
 	
 	private String nombreComercio;
 	private long cuit;
@@ -18,9 +18,9 @@ public class Comercio {
 	
 	//Constructor
 	
-	public Comercio(String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento,
+	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento,
 			int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) {
-		super();
+		super(id, contacto);
 		this.nombreComercio = nombreComercio;
 		this.cuit = cuit;
 		this.costoFijo = costoFijo;
