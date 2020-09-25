@@ -119,6 +119,97 @@ public class Comercio extends Actor{
 	
 	//Metodos de clase
 	
-	//METODO CON IMPLEMENTACION
+	public boolean agregarArticulo(Articulo articulo) {
+		
+		if(!existeArticulo(articulo)) {
+			this.getLstArticulo().add(articulo);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean eliminarArticulo(Articulo articulo) {
+		
+		if(!existeArticulo(articulo)) {
+			this.getLstArticulo().remove(articulo);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean existeArticulo(Articulo articulo) {
+		
+		for(Articulo a: this.getLstArticulo()) {
+			if(articulo.getId() == a.getId()) {
+				return true; //Poner un return aca es legal?
+			}
+		}
+		return false;
+	}
+	
+	private boolean existeCarrito(Carrito carrito) {
+		
+		for(Carrito c: this.getLstCarrito()) {
+			if(carrito.getId() == c.getId()) {
+				return true; //Poner un return aca es legal?
+			}
+		}
+		return false;
+	}
+	
+	
+	public boolean agregarCarrito(Carrito carrito) {
+		
+		if(!existeCarrito(carrito)) {
+			this.getLstCarrito().add(carrito);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	//Se puede sobrecargar este metodo, y que elimine por id--
+	public boolean eliminarCarrito(Carrito carrito) {
+		
+		if(!existeCarrito(carrito)) {
+			this.getLstCarrito().remove(carrito);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean agregarDiaRetiro(DiaRetiro dia) {
+		
+		if(!existeDiaRetiro(dia)) {
+			this.getLstDiaRetiro().add(dia);
+			return true;
+		}
+		
+		return false;
+	
+	}
+	
+	public boolean eliminarDiaRetiro(DiaRetiro dia) {
+		
+		if(!existeDiaRetiro(dia)) {
+			this.getLstDiaRetiro().remove(dia);
+			return true;
+		}
+		
+		return false;
+	
+	}
+	
+	private boolean existeDiaRetiro(DiaRetiro dia) {
+		
+		for(DiaRetiro d: this.getLstDiaRetiro()) {
+			if(dia.getId() == d.getId()) {
+				return true; //Poner un return aca es legal?
+			}
+		}
+		return false;
+	}
 
 }
