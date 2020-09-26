@@ -86,8 +86,7 @@ public class Articulo {
 		    int resImpares = sumaImpares*3;
 		    int sumaParImp = resImpares+sumaPares;
 		    codigoVerif = ((sumaParImp/10)+1)*10-sumaParImp;
-		    if (codigoVerif==10) {
-		        codigoVerif=0;
+		    if (codigoVerif<10) {
 		        valido = true;
 		    }
 		}
