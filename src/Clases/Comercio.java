@@ -124,14 +124,22 @@ public class Comercio extends Actor{
 	
 	//Metodos de clase
 	
-	public boolean agregarArticulo(Articulo articulo) {
+	public boolean agregarArticulo(Articulo articulo) throws Exception{
 		
 		if(!existeArticulo(articulo)) {
+			//Si la lista esta vacia, setea id del articulo como 1
+			if(this.getLstArticulo().isEmpty()) {
+				articulo.setId(1);
+			}
+			else { //Sino toma el id del ultimo articulo de la lista y le suma 1
+				articulo.setId(this.getLstArticulo().get(this.getLstArticulo().size()-1).getId()+1);
+			}
 			this.getLstArticulo().add(articulo);
 			return true;
 		}
-		
-		return false;
+		else {
+			throw new Exception ("Articulo existente.");
+		}
 	}
 	
 	public boolean eliminarArticulo(Articulo articulo) {
@@ -146,7 +154,7 @@ public class Comercio extends Actor{
 	private boolean existeArticulo(Articulo articulo) {
 		
 		for(Articulo a: this.getLstArticulo()) {
-			if(articulo.getId() == a.getId()) {
+			if(a.equals(articulo)) {
 				return true; //Poner un return aca es legal?
 			}
 		}
@@ -218,7 +226,7 @@ public class Comercio extends Actor{
 	}
 	
 	public boolean validarIdentificadorUnico(long cuit) {
-		boolean valido = false;
+		boolean valido = true;
 		
 		return valido;
 	}
