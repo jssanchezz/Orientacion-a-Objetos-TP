@@ -99,7 +99,48 @@ public class Carrito {
 	
 	//metodos de clase
 	
+	public boolean agregar(Articulo articulo, int cantidad) {
+		
+		//Verificar que no exista un item para ese articulo
+		
+		for(ItemCarrito i: this.lstItemCarrito) {
+			if(i.getArticulo().equals(articulo)) {
+				i.setCantidad(i.getCantidad()+cantidad);
+			}
+			else {
+				this.lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
+			}
+		}		
+		return true;
+	}
 	
+	public boolean sacar(Articulo articulo, int cantidad) throws Exception{
+		
+		for(ItemCarrito i: this.lstItemCarrito) {
+			if(i.getArticulo().equals(articulo)) {
+				if(cantidad < i.getCantidad()) {
+					i.setCantidad(i.getCantidad()-cantidad);
+					return true;
+				}
+				else {
+					this.lstItemCarrito.remove(i);
+					return true;
+				}
+			}
+		}
+		throw new Exception ("El articulo no existe en el carrito.");		
+	}
+	
+	public double calcularTotalCarrito() {
+		
+		double  total = 0;
+		
+		for(ItemCarrito i: this.lstItemCarrito) {
+			total+=(i.calcularSubTotalItem());
+		}
+		
+		return total;
+	}
 	
 
 }
