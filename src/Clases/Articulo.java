@@ -11,9 +11,9 @@ public class Articulo {
 	
 	//Constructor
 	
-	public Articulo(int id, String nombre, String codBarras, double precio) throws Exception{
+	public Articulo(String nombre, String codBarras, double precio) throws Exception{
 		super();
-		this.id = id;
+		this.id = 0;
 		this.nombre = nombre;
 		setCodBarras(codBarras);
 		this.precio = precio;
@@ -74,24 +74,35 @@ public class Articulo {
 		int sumaPares=0;
 		int sumaImpares=0;
 		int codigoVerif=0;
-		    for  (int i = 1; i< 13; i++){
-		        int numero= Integer.parseInt(cod.substring(i, i+1));
+		int numero=0;
+		int i=1;
+		    for  (i = 1; i< 13; i++){
+		        numero= Integer.parseInt(cod.substring(i, i+1));
 		        if (i%2==0){
 		            sumaPares=sumaPares+numero;
 		        }
 		        else{
-		            sumaImpares=sumaImpares+numero;
+		            sumaImpares=sumaImpares+numero;    
 		        }
+		        
 		    }
+		    numero= Integer.parseInt(cod.substring(i, i+1));
 		    int resImpares = sumaImpares*3;
 		    int sumaParImp = resImpares+sumaPares;
 		    codigoVerif = ((sumaParImp/10)+1)*10-sumaParImp;
-		    if (codigoVerif==10) {
-		        codigoVerif=0;
+		    if (codigoVerif == numero) {
 		        valido = true;
 		    }
 		}
 		return valido;
 	}
+
+	public boolean equals(Articulo articulo) {
+		
+		if(this.nombre == articulo.nombre)
+			return true;
+		return false;
+	}	
+	
 }
 
