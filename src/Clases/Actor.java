@@ -32,4 +32,5 @@ public abstract class Actor {
 	
 	//FIRMA METODO SIN IMPLEMENTAR
 	
+	protected abstract boolean validarIdentificadorUnico (long identificador);
 }
