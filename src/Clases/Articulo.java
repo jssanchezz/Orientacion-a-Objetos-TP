@@ -74,7 +74,7 @@ public class Articulo {
 		int sumaPares=0;
 		int sumaImpares=0;
 		int codigoVerif=0;
-		    for  (int i = 1; i< 13; i++){
+		    for  (int i = 1; i< 12; i++){
 		        int numero= Integer.parseInt(cod.substring(i, i+1));
 		        if (i%2==0){
 		            sumaPares=sumaPares+numero;
@@ -83,10 +83,11 @@ public class Articulo {
 		            sumaImpares=sumaImpares+numero;
 		        }
 		    }
+		    numero= Integer.parseInt(cod.substring(i, i+1));
 		    int resImpares = sumaImpares*3;
 		    int sumaParImp = resImpares+sumaPares;
 		    codigoVerif = ((sumaParImp/10)+1)*10-sumaParImp;
-		    if (codigoVerif<10) {
+		    if (codigoVerif == numero) {
 		        valido = true;
 		    }
 		}
