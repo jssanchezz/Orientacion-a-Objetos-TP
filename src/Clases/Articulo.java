@@ -11,9 +11,9 @@ public class Articulo {
 	
 	//Constructor
 	
-	public Articulo(int id, String nombre, String codBarras, double precio) throws Exception{
+	public Articulo(String nombre, String codBarras, double precio) throws Exception{
 		super();
-		this.id = id;
+		this.id = 0;
 		this.nombre = nombre;
 		setCodBarras(codBarras);
 		this.precio = precio;
@@ -96,5 +96,13 @@ public class Articulo {
 		}
 		return valido;
 	}
+
+	public boolean equals(Articulo articulo) {
+		
+		if(this.nombre == articulo.nombre)
+			return true;
+		return false;
+	}	
+	
 }
 
