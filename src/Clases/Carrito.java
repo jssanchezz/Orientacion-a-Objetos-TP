@@ -114,22 +114,25 @@ public class Carrito {
 		return true;
 	}
 	
-	public boolean sacar(Articulo articulo, int cantidad) throws Exception{
+	public void sacar(Articulo articulo, int cantidad) throws Exception{
 		
+		boolean exito = false;
+	
 		for(ItemCarrito i: this.lstItemCarrito) {
 			if(i.getArticulo().equals(articulo)) {
 				if(cantidad < i.getCantidad()) {
 					i.setCantidad(i.getCantidad()-cantidad);
-					return true;
 				}
 				else {
-					this.lstItemCarrito.remove(i);
-					return true;
+					this.lstItemCarrito.remove(i);					
 				}
+				exito = true;
 			}
 		}
-		throw new Exception ("El articulo no existe en el carrito.");		
+		if(!exito)
+			throw new Exception ("El articulo no existe en el carrito.");	
 	}
+	
 	
 	public double calcularTotalCarrito() {
 		
