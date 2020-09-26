@@ -31,4 +31,10 @@ public class Ubicacion {
 		this.longitud = longitud;
 	}
 //ANDAAAAAAAAAAAAa
+	
+	public Ubicacion traerUbicacion() {
+		return this;
+	}
+
+
 }

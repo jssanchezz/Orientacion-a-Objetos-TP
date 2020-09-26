@@ -6,15 +6,15 @@ public class Cliente extends Actor {
 	
 	private String apellido;
 	private String nombres;
-	private int dni;
+	private long dni;
 
 	//Constructor
 	
-	public Cliente(int id, Contacto contacto, String apellido, String nombres, int dni) {
-		super(id, contacto);
+	public Cliente(int id, Contacto contacto, String apellido, String nombres, long dni) throws Exception {
+	super(id, contacto);
 	this.apellido = apellido;
 	this.nombres = nombres;
-	this.dni = dni;
+	setDni(dni);
 	}
 
 	public String getApellido() {
@@ -34,17 +34,30 @@ public class Cliente extends Actor {
 		this.nombres = nombres;
 	}
 
-	public int getDni() {
+	public long getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
-		this.dni = dni;
+	public void setDni(long dni) throws Exception {
+		boolean valido = validarIdentificadorUnico(dni);
+		if (valido) {
+			this.dni = dni;
+		}else {
+			throw new Exception ("DNI no valido");
+		}
 	}
 
 	public String traerNombreCompleto() {
 		String resultado;
 		resultado = nombres + " " + apellido;
 		return resultado;
+	}
+	
+	public boolean validarIdentificadorUnico(long dni) {
+		boolean valido = false;
+		if (this.dni>999999 && this.dni<1000000) {
+			valido = true;
+		}
+		return valido;
 	}
 }

@@ -19,10 +19,10 @@ public class Comercio extends Actor{
 	//Constructor
 	
 	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento,
-			int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) {
+			int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) throws Exception {
 		super(id, contacto);
 		this.nombreComercio = nombreComercio;
-		this.cuit = cuit;
+		setCuit(cuit);
 		this.costoFijo = costoFijo;
 		this.costoPorKm = costoPorKm;
 		this.diaDescuento = diaDescuento;
@@ -48,8 +48,13 @@ public class Comercio extends Actor{
 		return cuit;
 	}
 
-	public void setCuit(long cuit) {
-		this.cuit = cuit;
+	public void setCuit(long cuit) throws Exception {
+		boolean valido = validarIdentificadorUnico(cuit);
+		if (valido) {
+			this.cuit = cuit;
+		}else {
+			throw new Exception ("CUIT no valido");
+		}
 	}
 
 	public double getCostoFijo() {
@@ -210,6 +215,12 @@ public class Comercio extends Actor{
 			}
 		}
 		return false;
+	}
+	
+	public boolean validarIdentificadorUnico(long cuit) {
+		boolean valido = false;
+		
+		return valido;
 	}
 
 }
