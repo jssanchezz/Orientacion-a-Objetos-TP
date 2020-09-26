@@ -226,8 +226,28 @@ public class Comercio extends Actor{
 	}
 	
 	public boolean validarIdentificadorUnico(long cuit) {
-		boolean valido = true;
-		
+		boolean valido = false;
+		long digito=0;
+		long multiplicar=2;
+		long suma=0;
+		long dgvalidador=0;
+		if (cuit <= 99999999999L) {
+			dgvalidador=cuit % 10;    
+			cuit=cuit/10;
+			for (int i=1; i==8; i++) {
+				digito=cuit % 10;
+				suma=suma+(digito*multiplicar);
+				cuit=cuit/10;  
+				multiplicar= multiplicar++;
+				if (multiplicar==7) {
+					multiplicar=2;
+				}
+			}
+			if (cuit==30 && dgvalidador==suma%11){
+				valido = true;
+			}
+                  
+		}
 		return valido;
 	}
 
