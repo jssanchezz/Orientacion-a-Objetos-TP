@@ -94,3 +94,4 @@ public class Articulo {
 		return valido;
 	}
 }
+
