@@ -145,5 +145,9 @@ public class Carrito {
 		return total;
 	}
 	
+	public boolean equals(Carrito carrito) {
+		if(this.cliente.equals(carrito.cliente)) return true;
+		return false;
+	}
 
 }
