@@ -30,7 +30,6 @@ public class Ubicacion {
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
-//ANDAAAAAAAAAAAAa
 	
 	public Ubicacion traerUbicacion() {
 		return this;

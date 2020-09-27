@@ -124,7 +124,7 @@ public class Comercio extends Actor{
 	
 	//Metodos de clase
 	
-	public boolean agregarArticulo(Articulo articulo) throws Exception{
+	public void agregarArticulo(Articulo articulo) throws Exception{
 		
 		if(!existeArticulo(articulo)) {
 			//Si la lista esta vacia, setea id del articulo como 1
@@ -135,95 +135,63 @@ public class Comercio extends Actor{
 				articulo.setId(this.getLstArticulo().get(this.getLstArticulo().size()-1).getId()+1);
 			}
 			this.getLstArticulo().add(articulo);
-			return true;
 		}
 		else {
 			throw new Exception ("Articulo existente.");
 		}
 	}
 	
-	public boolean eliminarArticulo(Articulo articulo) {
+	public void eliminarArticulo(Articulo articulo) throws Exception {
 		
 		if(!existeArticulo(articulo)) {
 			this.getLstArticulo().remove(articulo);
-			return true;
 		}
-		return false;
+		else {
+			throw new Exception ("Articulo inexistente.");
+		}
 	}
 	
-	private boolean existeArticulo(Articulo articulo) {
-		
+	private boolean existeArticulo(Articulo articulo) {		
+		boolean existe = false;
 		for(Articulo a: this.getLstArticulo()) {
 			if(a.equals(articulo)) {
-				return true; //Poner un return aca es legal?
+				existe = true;
 			}
 		}
-		return false;
+		return existe;
 	}
 	
 	private boolean existeCarrito(Carrito carrito) {
-		
+		boolean existe = false;
 		for(Carrito c: this.getLstCarrito()) {
-			if(carrito.getId() == c.getId()) {
-				return true; //Poner un return aca es legal?
+			if(c.equals(carrito)) {
+				existe = true;
 			}
 		}
-		return false;
+		return existe;
 	}
 	
 	
-	public boolean agregarCarrito(Carrito carrito) {
+	public void agregarCarrito(Carrito carrito) throws Exception {
 		
 		if(!existeCarrito(carrito)) {
 			this.getLstCarrito().add(carrito);
-			return true;
 		}
-		
-		return false;
+		else
+		{
+			throw new Exception ("Carrito existente/Cliente ya posee carrito.");
+		}
 	}
 	
-	//Se puede sobrecargar este metodo, y que elimine por id--
-	public boolean eliminarCarrito(Carrito carrito) {
+	
+	public void eliminarCarrito(Carrito carrito) throws Exception{
 		
-		if(!existeCarrito(carrito)) {
-			this.getLstCarrito().remove(carrito);
-			return true;
-		}
+		if(!this.lstCarrito.remove(carrito))
+			throw new Exception ("El carrito no existe");
 		
-		return false;
 	}
 	
-	public boolean agregarDiaRetiro(DiaRetiro dia) {
-		
-		if(!existeDiaRetiro(dia)) {
-			this.getLstDiaRetiro().add(dia);
-			return true;
-		}
-		
-		return false;
 	
-	}
-	
-	public boolean eliminarDiaRetiro(DiaRetiro dia) {
-		
-		if(!existeDiaRetiro(dia)) {
-			this.getLstDiaRetiro().remove(dia);
-			return true;
-		}
-		
-		return false;
-	
-	}
-	
-	private boolean existeDiaRetiro(DiaRetiro dia) {
-		
-		for(DiaRetiro d: this.getLstDiaRetiro()) {
-			if(dia.getId() == d.getId()) {
-				return true; //Poner un return aca es legal?
-			}
-		}
-		return false;
-	}
 	
 	public boolean validarIdentificadorUnico(long cuit) {
 		boolean valido = false;

@@ -60,4 +60,13 @@ public class Cliente extends Actor {
 		}
 		return valido;
 	}
+
+	
+	public boolean equals(Cliente cliente) {
+		if(this.id == cliente.id) return true;
+		return false;
+			
+	}
+	
+	
 }
