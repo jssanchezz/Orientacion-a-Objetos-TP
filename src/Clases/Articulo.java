@@ -76,7 +76,7 @@ public class Articulo {
 		int codigoVerif=0;
 		int numero=0;
 		int i=1;
-		    for  (i = 1; i< 13; i++){
+		    for  (i = 0; i< 12; i++){
 		        numero= Integer.parseInt(cod.substring(i, i+1));
 		        if (i%2==0){
 		            sumaPares=sumaPares+numero;
