@@ -101,16 +101,17 @@ public class Carrito {
 	
 	public boolean agregar(Articulo articulo, int cantidad) {
 		
-		//Verificar que no exista un item para ese articulo
+		boolean existe = false;
 		
 		for(ItemCarrito i: this.lstItemCarrito) {
 			if(i.getArticulo().equals(articulo)) {
+				existe = true;
 				i.setCantidad(i.getCantidad()+cantidad);
 			}
-			else {
-				this.lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
-			}
-		}		
+		}
+		if(!existe) {
+			this.lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
+		}
 		return true;
 	}
 	
@@ -146,7 +147,9 @@ public class Carrito {
 	}
 	
 	public boolean equals(Carrito carrito) {
-		if(this.cliente.equals(carrito.cliente)) return true;
+		if(this.cliente.equals(carrito.cliente)) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -162,18 +165,25 @@ public class Carrito {
 		double descuento = 0;
 		
 		if(diaDescuento == this.fecha.getDayOfWeek().getValue()) {
-			descuento = this.calcularTotalCarrito()*porcentajeDescuento;
+			descuento = this.calcularTotalCarrito()*(porcentajeDescuento/100);
 		}
 		
 		return descuento;
 	}
 	
 	public double calcularDescuentoEfectivo(double porcentajeDescuentoEfectivo) {
-		return this.calcularTotalCarrito()*porcentajeDescuentoEfectivo;
+		return this.calcularTotalCarrito()*(porcentajeDescuentoEfectivo/100);
 	}
 	
 	public double totalAPagarCarrito() {
 		return calcularTotalCarrito() - descuento;
+	}
+
+	@Override
+	public String toString() {
+		return "Carrito [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", cerrado=" + cerrado + ", descuento="
+				+ descuento + ", cliente=" + cliente + ", lstItemCarrito=" + lstItemCarrito + ", entrega=" + entrega
+				+ "]";
 	}
 
 }

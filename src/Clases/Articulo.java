@@ -103,6 +103,14 @@ public class Articulo {
 			return true;
 		return false;
 	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Articulo [id=" + id + ", nombre=" + nombre + ", codBarras=" + codBarras + ", precio=" + precio + "]";
+	}
+	
+	
 	
 }
 

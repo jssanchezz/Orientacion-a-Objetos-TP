@@ -30,4 +30,10 @@ public class ItemCarrito {
 	public double calcularSubTotalItem() {
 		return articulo.getPrecio()*cantidad;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemCarrito [articulo=" + articulo + ", cantidad=" + cantidad + "]";
+	}
+	
 }

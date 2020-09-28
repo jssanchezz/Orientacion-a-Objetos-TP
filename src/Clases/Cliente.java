@@ -63,10 +63,16 @@ public class Cliente extends Actor {
 
 	
 	public boolean equals(Cliente cliente) {
-		if(this.id == cliente.id) return true;
+		if(this.id == cliente.id) {
+			return true;
+		}
 		return false;
 			
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Cliente [apellido=" + apellido + ", nombres=" + nombres + ", dni=" + dni + "]";
+	}
 	
 }
