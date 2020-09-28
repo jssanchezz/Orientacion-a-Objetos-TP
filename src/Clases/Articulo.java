@@ -103,7 +103,6 @@ public class Articulo {
 			return true;
 		return false;
 	}	
-	}
 
 	@Override
 	public String toString() {
