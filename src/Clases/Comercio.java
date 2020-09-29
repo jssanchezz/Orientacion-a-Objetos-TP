@@ -1,5 +1,7 @@
 package Clases;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class Comercio extends Actor{
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
 		this.lstDiaRetiro = new ArrayList<DiaRetiro>();
 		this.lstArticulo = new ArrayList<Articulo>();
-		this.lstCarrito = new ArrayList<Carrito>();		
+		this.lstCarrito = new ArrayList<Carrito>();
 	}
 	
 	
@@ -121,7 +123,6 @@ public class Comercio extends Actor{
 		this.lstCarrito = lstCarrito;
 	}	
 	
-	
 	//Metodos de clase
 	
 	public void agregarArticulo(Articulo articulo) throws Exception{
@@ -202,16 +203,17 @@ public class Comercio extends Actor{
 		if (cuit <= 99999999999L) {
 			dgvalidador=cuit % 10;    
 			cuit=cuit/10;
-			for (int i=1; i==8; i++) {
+			for (int i=1; i<=10; i++) {
 				digito=cuit % 10;
 				suma=suma+(digito*multiplicar);
 				cuit=cuit/10;  
-				multiplicar= multiplicar++;
-				if (multiplicar==7) {
+				multiplicar++;
+				if (multiplicar==8) {
 					multiplicar=2;
 				}
 			}
-			if (cuit==30 && dgvalidador==suma%11){
+			suma = 11-(suma%11);
+			if (dgvalidador==suma){
 				valido = true;
 			}
                   
@@ -222,10 +224,10 @@ public class Comercio extends Actor{
 
 	@Override
 	public String toString() {
-		return "Comercio [nombreComercio=" + nombreComercio + ", cuit=" + cuit + ", costoFijo=" + costoFijo
-				+ ", costoPorKm=" + costoPorKm + ", diaDescuento=" + diaDescuento + ", porcentajeDescuentoDia="
-				+ porcentajeDescuentoDia + ", porcentajeDescuentoEfectivo=" + porcentajeDescuentoEfectivo
-				+ ", lstDiaRetiro=" + lstDiaRetiro + ", lstArticulo=" + lstArticulo + ", lstCarrito=" + lstCarrito
+		return "\tComercio \nnombreComercio= " + nombreComercio + ", \ncuit=" + cuit + ", \ncostoFijo=" + costoFijo
+				+ ", \ncostoPorKm=" + costoPorKm + ", \ndiaDescuento=" + diaDescuento + ", \nporcentajeDescuentoDia="
+				+ porcentajeDescuentoDia + ", \nporcentajeDescuentoEfectivo=" + porcentajeDescuentoEfectivo
+				+ ", \nlstDiaRetiro=" + lstDiaRetiro + ", \nlstArticulo=" + lstArticulo + ", \nlstCarrito=" + lstCarrito
 				+ "]";
 	}
 	
