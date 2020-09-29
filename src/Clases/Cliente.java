@@ -55,7 +55,7 @@ public class Cliente extends Actor {
 	
 	public boolean validarIdentificadorUnico(long dni) {
 		boolean valido = false;
-		if (this.dni>999999 && this.dni<1000000) {
+		if (dni>9999999 && dni<99999999) {
 			valido = true;
 		}
 		return valido;
