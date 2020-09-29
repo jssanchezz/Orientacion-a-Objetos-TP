@@ -169,9 +169,12 @@ public class Carrito {
 		double descuento = 0;
 		
 		if(diaDescuento == this.fecha.getDayOfWeek().getValue()) {
-			descuento = this.calcularTotalCarrito()*(porcentajeDescuento/100);
-		}
-		
+			for(ItemCarrito i: this.lstItemCarrito) {
+				if(i.getCantidad()>1) {
+					descuento+= ((i.getArticulo().getPrecio())*(i.getCantidad()/2))*(porcentajeDescuento/100);
+				}
+			}
+		}		
 		return descuento;
 	}
 	
