@@ -165,7 +165,7 @@ public class Comercio extends Actor{
 	private boolean existeCarrito(Carrito carrito) {
 		boolean existe = false;
 		for(Carrito c: this.getLstCarrito()) {
-			if(c.equals(carrito) && carrito.isCerrado()) {
+			if(c.equals(carrito) && !carrito.isCerrado()) {
 				existe = true;
 			}
 		}
