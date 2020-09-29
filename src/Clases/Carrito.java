@@ -155,8 +155,12 @@ public class Carrito {
 	
 	public void calcularDescuentoCarrito(int diaDescuento, double porcentajeDescuento, double porcentajeDescuentoEfectivo) {
 		double descuento = 0;
-		descuento += calcularDescuentoDia(diaDescuento, porcentajeDescuento);
-		descuento += calcularDescuentoEfectivo(porcentajeDescuentoEfectivo);
+		if(calcularDescuentoDia(diaDescuento, porcentajeDescuento) >= calcularDescuentoEfectivo(porcentajeDescuentoEfectivo))
+			{
+			descuento += calcularDescuentoDia(diaDescuento, porcentajeDescuento);
+		}else {
+			descuento += calcularDescuentoEfectivo(porcentajeDescuentoEfectivo);
+		}
 		this.setDescuento(descuento);
 	}
 	
