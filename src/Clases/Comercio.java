@@ -165,7 +165,7 @@ public class Comercio extends Actor{
 	private boolean existeCarrito(Carrito carrito) {
 		boolean existe = false;
 		for(Carrito c: this.getLstCarrito()) {
-			if(c.equals(carrito)) {
+			if(c.equals(carrito) && carrito.isCerrado()) {
 				existe = true;
 			}
 		}
@@ -176,6 +176,13 @@ public class Comercio extends Actor{
 	public void agregarCarrito(Carrito carrito) throws Exception {
 		
 		if(!existeCarrito(carrito)) {
+			//Si la lista esta vacia, setea id del carrito como 1
+			if(this.getLstCarrito().isEmpty()) {
+				carrito.setId(1);
+			}
+			else { //Sino toma el id del ultimo carrito de la lista y le suma 1
+				carrito.setId(this.getLstCarrito().get(this.getLstCarrito().size()-1).getId()+1);
+			}
 			this.getLstCarrito().add(carrito);
 		}
 		else
