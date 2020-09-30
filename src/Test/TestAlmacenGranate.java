@@ -26,99 +26,11 @@ public class TestAlmacenGranate {
 		// TODO Auto-generated method stub
 		try {
 			Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
-			Articulo articulo5 = new Articulo("Nutella", "7898024394181", 140.5);
-			// -------------------------------------------------------------
-			// Se Aniade un nuevo articulo:
-			// -------------------------------------------------------------
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 1: Nuevo Articulo con [codigo de barras = 7898024394181]<----");
-				System.out.print("\n");
-				Articulo articulo1 = new Articulo("Nutella", "7898024394181", 140.5);
-				System.out.println(articulo1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			}
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 2: Nuevo Articulo con [codigo de barras = 4564128481231]<----");
-				System.out.print("\n");
-				Articulo articulo1 = new Articulo("Nutella", "4564128481231", 140.5);
-				System.out.println(articulo1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			} finally {
-				System.out.println("\n\t---------Fin del caso de uso para crear un articulo---------");
-			}
-			Articulo articulo1 = new Articulo("Nutella", "7898024394181", 140.5);
-			Articulo articulo2 = new Articulo("Sabonis sabor", "6937733560324", 5.25);
-			ItemCarrito itemCarrito1 = new ItemCarrito(articulo1, 1);
-			// -------------------------------------------------------------
-			// Se Aniade un nuevo Cliente:
-			// -------------------------------------------------------------
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 1: Nuevo Cliente con [dni = 22354125]<----");
-				System.out.print("\n");
-				Cliente cliente1 = new Cliente(2, null, "Fernando", "Lopez", 22354125l);
-				System.out.println(cliente1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			}
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 2: Nuevo Cliente con [dni = 535412]<----");
-				System.out.print("\n");
-				Cliente cliente1 = new Cliente(2, contacto1, "Fernando", "Lopez", 535412l);
-				System.out.println(cliente1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			} finally {
-				System.out.println("\n\t---------Fin del caso de uso para crear un cliente---------");
-			}
-			Cliente cliente1 = new Cliente(2, contacto1, "Fernando", "Lopez", 22354125l);
-			// -------------------------------------------------------------
-			// Se agrega items al carrito:
-			// -------------------------------------------------------------
-			Carrito carrito1 = new Carrito(LocalDate.of(2020, 8, 20), LocalTime.of(10, 15), 22.45, cliente1, null);
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 1: Se agrega 1 item al carrito<----");
-				System.out.print("\n");
-				System.out.println(carrito1);
-				carrito1.agregar(articulo1, 3);
-				System.out.println(carrito1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			} finally {
-				System.out.println("\n\t---------Fin del caso de uso para sacar 1 articulo del carrito---------");
-			}
-			// -------------------------------------------------------------
-			// Se saca items del carrito:
-			// -------------------------------------------------------------
-			carrito1.agregar(articulo1, 3);
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 1: Sacar Items 1 unidad de un Articulo del carrito<----");
-				System.out.print("\n");
-				System.out.println(carrito1);
-				carrito1.sacar(articulo1, 3);
-				System.out.println(carrito1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			}
-			try {
-				System.out.print("\n");
-				System.out.println("---->Escenario 2: Sacar Items 3 unidades de un Articulo del carrito<----");
-				System.out.print("\n");
-				carrito1.sacar(articulo1, 3);
-				System.out.println(carrito1);
-			} catch (Exception e) {
-				System.out.println("Exception: " + e.getMessage());
-			} finally {
-				System.out.println("\n\t---------Fin del caso de uso para sacar 1 articulo del carrito---------");
-			}
-			carrito1.agregar(articulo1, 3);
+			Comercio comercio1 = null;
+			Articulo articulo1 = null;
+			Articulo articulo2 = null;
+			Cliente cliente1 = null;
+			//Articulo articulo2 = new Articulo("Sabonis sabor", "6937733560324", 5.25);
 			// -------------------------------------------------------------
 			// Se Añade un nuevo Comercio:
 			// -------------------------------------------------------------
@@ -126,7 +38,7 @@ public class TestAlmacenGranate {
 				System.out.print("\n");
 				System.out.println("---->Escenario 1: Nuevo comercio con [cuit = 30610252334]<----");
 				System.out.print("\n");
-				Comercio comercio1 = new Comercio(2, contacto1, "Super Pepe", 30610252334l, 22.52, 14.55, 2, 6, 25);
+				comercio1 = new Comercio(2, contacto1, "Super Pepe", 30610252334l, 22.52, 14.55, 2, 6, 25);
 				System.out.println(comercio1);
 			} catch (Exception e) {
 				System.out.println("Exception: " + e.getMessage());
@@ -135,14 +47,37 @@ public class TestAlmacenGranate {
 				System.out.print("\n");
 				System.out.println("---->Escenario 2: Nuevo comercio con [cuit = 3012354825]<----");
 				System.out.print("\n");
-				Comercio comercio1 = new Comercio(2, null, "Super Pedro", 3012354825l, 22.52, 14.55, 2, 6, 25);
+				comercio1 = new Comercio(2, null, "Super Pedro", 3012354825l, 22.52, 14.55, 2, 6, 25);
 				System.out.println(comercio1);
 			} catch (Exception e) {
 				System.out.println("Exception: " + e.getMessage());
 			} finally {
 				System.out.println("\n\t---------Fin del caso de uso para crear un nuevo comercio---------");
 			}
-			Comercio comercio1 = new Comercio(2, contacto1, "Super Pepe", 30610252334l, 22.52, 14.55, 2, 6, 25);
+			// -------------------------------------------------------------
+			// Se Aniade un nuevo articulo:
+			// -------------------------------------------------------------
+			try {
+				System.out.print("\n");
+				System.out.println("---->Escenario 1: Nuevo Articulo con [codigo de barras = 7898024394181]<----");
+				System.out.print("\n");
+				articulo1 = new Articulo("Nutella", "7898024394181", 140.5);
+				System.out.println(articulo1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			}
+			try {
+				System.out.print("\n");
+				System.out.println("---->Escenario 2: Nuevo Articulo con [codigo de barras = 4564128481231]<----");
+				System.out.print("\n");
+				articulo1 = new Articulo("Nutella", "4564128481231", 140.5);
+				System.out.println(articulo1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			} finally {
+				System.out.println("\n\t---------Fin del caso de uso para crear un articulo---------");
+			}
+			ItemCarrito itemCarrito1 = new ItemCarrito(articulo1, 1);
 			// -------------------------------------------------------------
 			// Se Aniade un nuevo Articulo a la lista de articulos del Comercio:
 			// -------------------------------------------------------------
@@ -168,33 +103,45 @@ public class TestAlmacenGranate {
 				System.out.println(
 						"\n\t---------Fin del caso de uso para agregar un articulo a lstArticulos de comercio---------");
 			}
-			// comercio1.agregarArticulo(articulo1);
 			// -------------------------------------------------------------
-			// Se elimina un nuevo Articulo de la lst Articulo de Comercio:
+			// Se Aniade un nuevo Cliente:
 			// -------------------------------------------------------------
 			try {
 				System.out.print("\n");
-				System.out.println("---->Escenario 1: Se elimina un Articulo a la lstArticulo de comercio<----");
+				System.out.println("---->Escenario 1: Nuevo Cliente con [dni = 22354125]<----");
 				System.out.print("\n");
-				comercio1.eliminarArticulo(articulo1);
-				System.out.println(comercio1);
+				cliente1 = new Cliente(2, null, "Lopez", "Fernando", 22354125l);
+				System.out.println(cliente1);
 			} catch (Exception e) {
 				System.out.println("Exception: " + e.getMessage());
 			}
 			try {
 				System.out.print("\n");
-				System.out.println(
-						"---->Escenario 2: Se intenta eliminar un Articulo a la lstArticulo de comercio que ya fue eliminado<----");
+				System.out.println("---->Escenario 2: Nuevo Cliente con [dni = 535412]<----");
 				System.out.print("\n");
-				comercio1.eliminarArticulo(articulo1);
-				System.out.println(comercio1);
+				cliente1 = new Cliente(2, contacto1, "Fernando", "Lopez", 535412l);
+				System.out.println(cliente1);
 			} catch (Exception e) {
 				System.out.println("Exception: " + e.getMessage());
 			} finally {
-				System.out.println(
-						"\n\t---------Fin del caso de uso para eliminar un articulo de lstArticulos de comercio---------");
+				System.out.println("\n\t---------Fin del caso de uso para crear un cliente---------");
 			}
-			// comercio1.eliminarArticulo(articulo2);
+			// -------------------------------------------------------------
+			// Se agrega items al carrito:
+			// -------------------------------------------------------------
+			Carrito carrito1 = new Carrito(LocalDate.of(2020, 8, 20), LocalTime.of(10, 15), 22.45, cliente1, null);
+			try {
+				System.out.print("\n");
+				System.out.println("---->Escenario 1: Se agrega 1 item al carrito<----");
+				System.out.print("\n");
+				System.out.println(carrito1);
+				carrito1.agregar(articulo1, 3);
+				System.out.println(carrito1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			} finally {
+				System.out.println("\n\t---------Fin del caso de uso para sacar 1 articulo del carrito---------");
+			}
 			// -------------------------------------------------------------
 			// Se agrega un carrito al lstcarrito de Comercio:
 			// -------------------------------------------------------------
@@ -232,12 +179,62 @@ public class TestAlmacenGranate {
 						"\n\t---------Fin del caso de uso para agregar un carrito a lstCarrito de comercio---------");
 			}
 			// -------------------------------------------------------------
+			// Se saca items del carrito:
+			// -------------------------------------------------------------
+			try {
+				System.out.print("\n");
+				System.out.println("---->Escenario 1: Sacar Items 3 unidad de un Articulo del carrito<----");
+				System.out.print("\n");
+				System.out.println(carrito1);
+				carrito1.sacar(articulo1, 3);
+				System.out.println(carrito1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			}
+			try {
+				System.out.print("\n");
+				System.out.println("---->Escenario 2: Sacar Items 3 unidades de un Articulo del carrito<----");
+				System.out.print("\n");
+				carrito1.sacar(articulo1, 3);
+				System.out.println(carrito1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			} finally {
+				System.out.println("\n\t---------Fin del caso de uso para sacar 1 articulo del carrito---------");
+			}
+			// -------------------------------------------------------------
+			// Se elimina un nuevo Articulo de la lst Articulo de Comercio:
+			// -------------------------------------------------------------
+			try {
+				System.out.print("\n");
+				System.out.println("---->Escenario 1: Se elimina un Articulo a la lstArticulo de comercio<----");
+				System.out.print("\n");
+				comercio1.eliminarArticulo(articulo1);
+				System.out.println(comercio1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			}
+			try {
+				System.out.print("\n");
+				System.out.println(
+						"---->Escenario 2: Se intenta eliminar un Articulo a la lstArticulo del comercio que ya fue eliminado<----");
+				System.out.print("\n");
+				comercio1.eliminarArticulo(articulo1);
+				System.out.println(comercio1);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			} finally {
+				System.out.println(
+						"\n\t---------Fin del caso de uso para eliminar un articulo de lstArticulos de comercio---------");
+			}
+			// -------------------------------------------------------------
 			// Se elimina un carrito al lstcarrito de Comercio:
 			// -------------------------------------------------------------
 			try {
 				System.out.print("\n");
 				System.out.println("---->Escenario 1: Se elimina un carrito a la lstCarrito de comercio<----");
 				System.out.print("\n");
+				comercio1.eliminarCarrito(carrito1);
 				comercio1.eliminarCarrito(carrito1);
 				System.out.println(comercio1);
 			} catch (Exception e) {
