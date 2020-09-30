@@ -63,7 +63,7 @@ public class Cliente extends Actor {
 
 	
 	public boolean equals(Cliente cliente) {
-		if(this.id == cliente.id) {
+		if(this.dni == cliente.dni) {
 			return true;
 		}
 		return false;
