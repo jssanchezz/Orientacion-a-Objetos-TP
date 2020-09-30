@@ -133,7 +133,10 @@ public class Carrito {
 				this.lstItemCarrito.remove(aux);
 			}
 		}
+		else {
 			throw new Exception ("El articulo no existe en el carrito.");	
+		}
+			
 	}
 	
 	
