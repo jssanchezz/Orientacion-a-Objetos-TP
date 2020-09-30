@@ -99,7 +99,7 @@ public class Articulo {
 
 	public boolean equals(Articulo articulo) {
 		
-		if(this.nombre == articulo.nombre)
+		if(this.codBarras == articulo.codBarras)
 			return true;
 		return false;
 	}	
