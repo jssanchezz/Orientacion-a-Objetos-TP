@@ -23,7 +23,7 @@ public class TestAlmacenGranate {
 			
 			//Articulo articulo2 = new Articulo("Sabonis sabor", "6937733560324", 5.25);
 			// -------------------------------------------------------------
-			// Se Añade un nuevo Comercio:
+			// Se crea un nuevo Comercio:
 			// -------------------------------------------------------------
 			
 			System.out.println("\n---->Escenario 1: Nuevo comercio con [cuit = 30610252334]<----\n");
@@ -47,7 +47,7 @@ public class TestAlmacenGranate {
 			}
 			
 			// -------------------------------------------------------------
-			// Se Añade un nuevo articulo:
+			// Se agrega un nuevo articulo:
 			// -------------------------------------------------------------
 			
 			System.out.println("\n---->Escenario 1: Nuevo Articulo con [codigo de barras = 7898024394181]<----\n");
@@ -71,7 +71,7 @@ public class TestAlmacenGranate {
 			}
 			
 			// -------------------------------------------------------------
-			// Se Aniade un nuevo Articulo a la lista de articulos del Comercio:
+			// Se agrega un nuevo Articulo a la lista de articulos del Comercio:
 			// -------------------------------------------------------------
 			
 			System.out.println("\n---->Escenario 1: Se agrega un Articulo a la lstArticulo de comercio<----\n");
@@ -95,7 +95,7 @@ public class TestAlmacenGranate {
 						"\n\t---------Fin del caso de uso para agregar un articulo a lstArticulos de comercio---------");
 			}
 			// -------------------------------------------------------------
-			// Se Aniade un nuevo Cliente:
+			// Se agrega un nuevo Cliente:
 			// -------------------------------------------------------------
 			
 			System.out.println("\n---->Escenario 1: Nuevo Cliente con [dni = 22354125]<----\n");
