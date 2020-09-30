@@ -144,7 +144,7 @@ public class Comercio extends Actor{
 	
 	public void eliminarArticulo(Articulo articulo) throws Exception {
 		
-		if(!existeArticulo(articulo)) {
+		if(existeArticulo(articulo)) {
 			this.getLstArticulo().remove(articulo);
 		}
 		else {
