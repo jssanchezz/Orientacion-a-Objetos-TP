@@ -231,11 +231,10 @@ public class Comercio extends Actor{
 
 	@Override
 	public String toString() {
-		return "\tComercio \nnombreComercio= " + nombreComercio + ", \ncuit=" + cuit + ", \ncostoFijo=" + costoFijo
-				+ ", \ncostoPorKm=" + costoPorKm + ", \ndiaDescuento=" + diaDescuento + ", \nporcentajeDescuentoDia="
+		return "\tComercio \nnombreComercio= " + nombreComercio + ", \ncuit= " + cuit + ", \ncostoFijo= " + costoFijo
+				+ ", \ncostoPorKm= " + costoPorKm + ", \ndiaDescuento= " + diaDescuento + ", \nporcentajeDescuentoDia= "
 				+ porcentajeDescuentoDia + ", \nporcentajeDescuentoEfectivo=" + porcentajeDescuentoEfectivo
-				+ ", \nlstDiaRetiro=" + lstDiaRetiro + ", \nlstArticulo=" + lstArticulo + ", \nlstCarrito=" + lstCarrito
-				+ "]";
+				+ ", \nlstDiaRetiro= " + lstDiaRetiro + ", \nlstArticulo= " + lstArticulo + ", \nlstCarrito= " + lstCarrito;
 	}
 	
 
