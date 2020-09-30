@@ -19,12 +19,12 @@ public class Carrito {
 	//Constructor
 	
 	
-	public Carrito(int id, LocalDate fecha, LocalTime hora, boolean cerrado, double descuento, Cliente cliente, Entrega entrega) {
+	public Carrito(LocalDate fecha, LocalTime hora, double descuento, Cliente cliente, Entrega entrega) {
 		super();
-		this.id = id;
+		this.id = 0;
 		this.fecha = fecha;
 		this.hora = hora;
-		this.cerrado = cerrado;
+		this.cerrado = false;
 		this.descuento = 0;
 		this.cliente = cliente;
 		this.lstItemCarrito = new ArrayList<ItemCarrito>();
@@ -97,6 +97,7 @@ public class Carrito {
 		this.entrega = entrega;
 	}
 	
+	
 	//metodos de clase
 	
 	public boolean agregar(Articulo articulo, int cantidad) {
@@ -117,20 +118,21 @@ public class Carrito {
 	
 	public void sacar(Articulo articulo, int cantidad) throws Exception{
 		
-		boolean exito = false;
-	
+		ItemCarrito aux = null;
+		
 		for(ItemCarrito i: this.lstItemCarrito) {
 			if(i.getArticulo().equals(articulo)) {
-				if(cantidad < i.getCantidad()) {
-					i.setCantidad(i.getCantidad()-cantidad);
-				}
-				else {
-					this.lstItemCarrito.remove(i);					
-				}
-				exito = true;
+				aux = i;
 			}
 		}
-		if(!exito)
+		if(aux!=null) {
+			if(cantidad < aux.getCantidad()) {
+					aux.setCantidad(aux.getCantidad()-cantidad);
+			}
+			else{
+				this.lstItemCarrito.remove(aux);
+			}
+		}
 			throw new Exception ("El articulo no existe en el carrito.");	
 	}
 	
