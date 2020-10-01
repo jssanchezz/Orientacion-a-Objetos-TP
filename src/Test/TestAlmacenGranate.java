@@ -26,7 +26,7 @@ public class TestAlmacenGranate {
 		}
 		
 		System.out.println(miComercio.toString());
-		
+
 		//Lo agrega
 		try {
 			miComercio.agregarArticulo("Lapicera", "6937733560324", 10);
@@ -107,8 +107,15 @@ public class TestAlmacenGranate {
 			System.out.println(e.getMessage());
 		}
 		System.out.println(miComercio.traerCarrito(1));
-		
-		
+		//Aplicamos descuentos y mostramos el total con el descuento aplicado
+		miComercio.traerCarrito(1).agregar(miComercio.traerArticulo(1), 3);
+		try {
+			miComercio.traerCarrito(1).calcularDescuentoCarrito(miComercio.getDiaDescuento(), miComercio.getPorcentajeDescuentoDia(), miComercio.getPorcentajeDescuentoEfectivo());
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		System.out.println(miComercio.traerCarrito(1));
+		System.out.println(miComercio.traerCarrito(1).totalAPagarCarrito());
 		/*try {
 			Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
 			Comercio comercio1 = null;
