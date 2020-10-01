@@ -11,9 +11,9 @@ public class Articulo {
 	
 	//Constructor
 	
-	public Articulo(String nombre, String codBarras, double precio) throws Exception{
+	public Articulo(int id, String nombre, String codBarras, double precio) throws Exception{
 		super();
-		this.id = 0;
+		this.id = id;
 		this.nombre = nombre;
 		setCodBarras(codBarras);
 		this.precio = precio;

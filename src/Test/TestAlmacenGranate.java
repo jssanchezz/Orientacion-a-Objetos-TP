@@ -14,7 +14,102 @@ public class TestAlmacenGranate {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
+		
+		Comercio miComercio = null;
+		
 		try {
+			miComercio = new Comercio(2, contacto1, "Super Pepe", 30610252334l, 22.52, 14.55, 2, 6, 25);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		System.out.println(miComercio.toString());
+		
+		//Lo agrega
+		try {
+			miComercio.agregarArticulo("Lapicera", "6937733560324", 10);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		//No agrega porque repite
+		try {
+			miComercio.agregarArticulo("Lapicera", "6937733560324", 10);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		//No agrega por codigo invalido
+		try {
+			miComercio.agregarArticulo("Nutella", "27898024394181", 340);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		//Agrega y verificamos el incremento del id
+		try {
+			miComercio.agregarArticulo("Bic", "6921734966469", 10);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+				
+		
+		//Creamos el cliente para el carrito, hay que ver bien si lo instanciamos aca o donde
+		Cliente juan = null; 
+		try {
+			juan = new Cliente(1, null, "Juan", "Sanchez", 37608935);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		//Agrega el primero y el segundo no ya que pertenece al mismo cliente y el carrito esta abierto
+		try {
+			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan);
+			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		miComercio.traerCarrito(1).setCerrado(true);
+		
+		//Al cerrar un carrito del cliente, permite volver a crear otro para el mismo cliente
+		try {
+			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		System.out.println(miComercio.toString());
+		
+		//Agregamos el articulo con id 1 al carrito (si se pasa un id que no existe, devuelve null pero la clase Carrito no lo agrega)
+		miComercio.traerCarrito(1).agregar(miComercio.traerArticulo(1), 3);
+		System.out.println(miComercio.traerCarrito(1));
+		
+		//Sacamos una cantidad menor a la total
+		try {
+			miComercio.traerCarrito(1).sacar(miComercio.traerArticulo(1), 2);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(miComercio.traerCarrito(1));
+		
+		//Sacamos unidades restantes
+		try {
+			miComercio.traerCarrito(1).sacar(miComercio.traerArticulo(1), 1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(miComercio.traerCarrito(1));
+		
+		//Intentamos sacar un articulo que ya no existe
+		try {
+			miComercio.traerCarrito(1).sacar(miComercio.traerArticulo(1), 2);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(miComercio.traerCarrito(1));
+		
+		
+		/*try {
 			Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
 			Comercio comercio1 = null;
 			Articulo articulo1 = null;
@@ -244,7 +339,7 @@ public class TestAlmacenGranate {
 			}
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
-		}
+		}*/
 	}
 
 }

@@ -125,81 +125,96 @@ public class Comercio extends Actor{
 	
 	//Metodos de clase
 	
-	public void agregarArticulo(Articulo articulo) throws Exception{
-		
-		if(!existeArticulo(articulo)) {
-			//Si la lista esta vacia, setea id del articulo como 1
-			if(this.getLstArticulo().isEmpty()) {
-				articulo.setId(1);
-			}
-			else { //Sino toma el id del ultimo articulo de la lista y le suma 1
-				articulo.setId(this.getLstArticulo().get(this.getLstArticulo().size()-1).getId()+1);
-			}
-			this.getLstArticulo().add(articulo);
-		}
-		else {
+	public boolean agregarArticulo(String nombre, String codBarras, double precio) throws Exception{
+		if(traerArticulo(codBarras) != null) {
 			throw new Exception ("Articulo existente.");
 		}
+		int id = 1;
+		if(this.getLstArticulo().size()>0) {
+			id = (this.getLstArticulo().get(this.getLstArticulo().size()-1).getId()+1);
+		}
+		return this.getLstArticulo().add(new Articulo(id, nombre, codBarras, precio));
 	}
 	
-	public void eliminarArticulo(Articulo articulo) throws Exception {
+	public boolean eliminarArticulo(int id) throws Exception {
+		Articulo aux = traerArticulo(id);
+		if(aux!=null) {
+			throw new Exception ("Articulo inexistente");
+		}
+		return this.lstArticulo.remove(aux);
+	}
+
+
+	private Articulo traerArticulo(String codBarras) {		
 		
-		if(existeArticulo(articulo)) {
-			this.getLstArticulo().remove(articulo);
+		Articulo articulo = null;
+		int i = 0;		
+		while(articulo == null && i < this.lstArticulo.size() ) {
+			if(this.lstArticulo.get(i).getCodBarras() == codBarras) {
+				articulo = this.lstArticulo.get(i);
+			}
+			i++;
 		}
-		else {
-			throw new Exception ("Articulo inexistente.");
-		}
+		return articulo;
 	}
 	
-	private boolean existeArticulo(Articulo articulo) {		
+	public Articulo traerArticulo(int id) {
+		Articulo articulo = null;
+		int i = 0;		
+		while(articulo == null && i < this.lstArticulo.size() ) {
+			if(this.lstArticulo.get(i).getId() == id) {
+				articulo = this.lstArticulo.get(i);
+			}
+			i++;
+		}
+		return articulo;
+	}
+	
+		
+	public boolean agregarCarrito(LocalDate fecha, LocalTime hora, Cliente cliente) throws Exception {
+		
+		if(existeCarritoAbierto(cliente)) {
+			throw new Exception ("El cliente posee carrito abierto.");
+		}		
+		int id = 1;
+		if(this.lstCarrito.size()>0) {
+			id = this.lstCarrito.get(this.lstCarrito.size()-1).getId()+1;
+		}
+		return this.lstCarrito.add(new Carrito(id, fecha, hora, cliente));
+	}
+	
+	
+	public boolean eliminarCarrito(int id) throws Exception{	
+		Carrito aux = traerCarrito(id);
+		if(aux==null) {
+			throw new Exception ("No existe el carrito.");
+		}
+		return this.lstCarrito.remove(aux);
+	}
+	
+	public Carrito traerCarrito(int id) {
+		Carrito carrito = null;
+		int i = 0;
+		while(carrito==null && i<this.lstCarrito.size()) {
+			if(this.lstCarrito.get(i).getId()==id) {
+				carrito = this.lstCarrito.get(i);
+			}
+			i++;
+		}
+		return carrito;
+	}
+	
+	public boolean existeCarritoAbierto(Cliente cliente) {
 		boolean existe = false;
-		for(Articulo a: this.getLstArticulo()) {
-			if(a.equals(articulo)) {
+		int i = 0;
+		while(!existe && i < this.lstCarrito.size()) {
+			if(this.lstCarrito.get(i).getCliente().equals(cliente) && !this.lstCarrito.get(i).isCerrado()) {
 				existe = true;
 			}
+			i++;
 		}
 		return existe;
 	}
-	
-	private boolean existeCarrito(Carrito carrito) {
-		boolean existe = false;
-		for(Carrito c: this.getLstCarrito()) {
-			if(c.equals(carrito) && !carrito.isCerrado()) {
-				existe = true;
-			}
-		}
-		return existe;
-	}
-	
-	
-	public void agregarCarrito(Carrito carrito) throws Exception {
-		
-		if(!existeCarrito(carrito)) {
-			//Si la lista esta vacia, setea id del carrito como 1
-			if(this.getLstCarrito().isEmpty()) {
-				carrito.setId(1);
-			}
-			else { //Sino toma el id del ultimo carrito de la lista y le suma 1
-				carrito.setId(this.getLstCarrito().get(this.getLstCarrito().size()-1).getId()+1);
-			}
-			this.getLstCarrito().add(carrito);
-		}
-		else
-		{
-			throw new Exception ("Carrito existente/Cliente ya posee carrito.");
-		}
-	}
-	
-	
-	public void eliminarCarrito(Carrito carrito) throws Exception{
-		
-		if(!this.lstCarrito.remove(carrito))
-			throw new Exception ("El carrito no existe");
-		
-	}
-	
-	
 	
 	public boolean validarIdentificadorUnico(long cuit) {
 		boolean valido = false;

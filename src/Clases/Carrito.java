@@ -18,16 +18,21 @@ public class Carrito {
 	
 	//Constructor
 	
-	
-	public Carrito(LocalDate fecha, LocalTime hora, double descuento, Cliente cliente, Entrega entrega) {
+	public Carrito(int id, LocalDate fecha, LocalTime hora, Cliente cliente) {
 		super();
-		this.id = 0;
+		this.id = id;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.cerrado = false;
 		this.descuento = 0;
 		this.cliente = cliente;
 		this.lstItemCarrito = new ArrayList<ItemCarrito>();
+		this.entrega = null;
+	}
+	
+	public Carrito(int id, LocalDate fecha, LocalTime hora, Cliente cliente, Entrega entrega) {
+		
+		this(id, fecha, hora, cliente);
 		this.entrega = entrega;
 	}
 	
@@ -102,41 +107,43 @@ public class Carrito {
 	
 	public boolean agregar(Articulo articulo, int cantidad) {
 		
-		boolean existe = false;
+		if(articulo == null)
+			return false; //Agregué esto para que no se inserten articulos en null
 		
-		for(ItemCarrito i: this.lstItemCarrito) {
-			if(i.getArticulo().equals(articulo)) {
-				existe = true;
-				i.setCantidad(i.getCantidad()+cantidad);
-			}
+		ItemCarrito aux = traerItem(articulo);
+		if(aux!=null) {
+			aux.setCantidad(aux.getCantidad()+cantidad);
 		}
-		if(!existe) {
-			this.lstItemCarrito.add(new ItemCarrito(articulo, cantidad));
+		else {
+			this.lstItemCarrito.add(new ItemCarrito(articulo,cantidad));
 		}
 		return true;
 	}
 	
-	public void sacar(Articulo articulo, int cantidad) throws Exception{
-		
+	private ItemCarrito traerItem(Articulo articulo) {
 		ItemCarrito aux = null;
+		int i = 0;
+		while(aux == null && i < this.lstItemCarrito.size()) {
+			if(this.lstItemCarrito.get(i).getArticulo().equals(articulo)) {
+				aux = this.lstItemCarrito.get(i);
+			}
+			i++;
+		}
+		return aux;
+	}
+	
+	public boolean sacar(Articulo articulo, int cantidad) throws Exception{
 		
-		for(ItemCarrito i: this.lstItemCarrito) {
-			if(i.getArticulo().equals(articulo)) {
-				aux = i;
-			}
+		ItemCarrito aux = traerItem(articulo);
+		if(aux==null) {
+			throw new Exception ("No existe el articulo en el carrito.");
 		}
-		if(aux!=null) {
-			if(cantidad < aux.getCantidad()) {
-					aux.setCantidad(aux.getCantidad()-cantidad);
-			}
-			else{
-				this.lstItemCarrito.remove(aux);
-			}
+		
+		aux.setCantidad(aux.getCantidad()-cantidad);
+		if(aux.getCantidad()<1) {
+			this.lstItemCarrito.remove(aux);
 		}
-		else {
-			throw new Exception ("El articulo no existe en el carrito.");	
-		}
-			
+		return true;
 	}
 	
 	
