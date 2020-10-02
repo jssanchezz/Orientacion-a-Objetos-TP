@@ -174,7 +174,7 @@ public class Comercio extends Actor{
 		
 	public boolean agregarCarrito(LocalDate fecha, LocalTime hora, Cliente cliente) throws Exception {
 		
-		if(existeCarritoAbierto(cliente)) {
+		if(traerCarrito(cliente)!=null) {
 			throw new Exception ("El cliente posee carrito abierto.");
 		}		
 		int id = 1;
@@ -209,7 +209,7 @@ public class Comercio extends Actor{
 		Carrito carrito = null;
 		int i = 0;
 		while(carrito==null && i<this.lstCarrito.size()) {
-			if(this.lstCarrito.get(i).getCliente().equals(cliente)) {
+			if(this.lstCarrito.get(i).getCliente().equals(cliente) && !this.lstCarrito.get(i).isCerrado()) {
 				carrito = this.lstCarrito.get(i);
 			}
 			i++;
@@ -217,41 +217,23 @@ public class Comercio extends Actor{
 		return carrito;
 	}
 	
-	public boolean existeCarritoAbierto(Cliente cliente) {
-		boolean existe = false;
-		int i = 0;
-		while(!existe && i < this.lstCarrito.size()) {
-			if(this.lstCarrito.get(i).getCliente().equals(cliente) && !this.lstCarrito.get(i).isCerrado()) {
-				existe = true;
-			}
-			i++;
-		}
-		return existe;
-	}
-	
 	public double cobrarCarrito(int idCarrito) throws Exception {
-		double total = 0;
-
-		if(!traerCarrito(idCarrito).isCerrado()) throw new Exception("Error el carrito no esta cerrado");
-		else{
-			traerCarrito(idCarrito).calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,
-					porcentajeDescuentoEfectivo);
-			total = traerCarrito(idCarrito).totalAPagarCarrito();
-			return total;
-		} 
+		Carrito carrito = traerCarrito(idCarrito);
+		if(carrito==null) throw new Exception("No existe carrito.");
+		return cobrarCarrito(traerCarrito(idCarrito).getCliente());
 	}
 	
 	public double cobrarCarrito(Cliente cliente) throws Exception{
 		
-		double total = 0;
+		Carrito carrito = traerCarrito(cliente);
 		
-		if(!traerCarrito(cliente).isCerrado()) throw new Exception("Error el carrito no esta cerrado");
-		else{
-			traerCarrito(cliente).calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,
-					porcentajeDescuentoEfectivo);
-			total = traerCarrito(cliente).totalAPagarCarrito();
-			return total;
-		} 
+		if(carrito==null) throw new Exception("No existe el carrito/Esta cerrado.");
+		if(carrito.getLstItemCarrito().size()==0) throw new Exception ("El carrito esta vacio.");
+		
+		
+		carrito.setCerrado(true);
+		carrito.calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,porcentajeDescuentoEfectivo);
+		return carrito.totalAPagarCarrito();
 	}
 		
 	
