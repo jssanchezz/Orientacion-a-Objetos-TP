@@ -72,7 +72,7 @@ public class Cliente extends Actor {
 
 	@Override
 	public String toString() {
-		return "Cliente [apellido=" + apellido + ", nombres=" + nombres + ", dni=" + dni + "]";
+		return "apellido: " + apellido + ", nombres: " + nombres + ", dni: " + dni;
 	}
 	
 }

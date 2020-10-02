@@ -229,14 +229,14 @@ public class Comercio extends Actor{
 		return existe;
 	}
 	
-	public double cobrarCarrito(int carrito) throws Exception {
+	public double cobrarCarrito(int idCarrito) throws Exception {
 		double total = 0;
 
-		if(!traerCarrito(carrito).isCerrado()) throw new Exception("Error el carrito no esta cerrado");
+		if(!traerCarrito(idCarrito).isCerrado()) throw new Exception("Error el carrito no esta cerrado");
 		else{
-			traerCarrito(carrito).calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,
+			traerCarrito(idCarrito).calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,
 					porcentajeDescuentoEfectivo);
-			total = traerCarrito(carrito).totalAPagarCarrito();
+			total = traerCarrito(idCarrito).totalAPagarCarrito();
 			return total;
 		} 
 	}
@@ -282,6 +282,12 @@ public class Comercio extends Actor{
 		return valido;
 	}
 
+	public String mostrarTicket(int idCarrito) {
+		return "El Carrito es el numero " + this.lstCarrito.get(idCarrito).getId() + "° \nNombre: "
+				+ this.lstCarrito.get(idCarrito).getCliente() + "\n\tProductos\tPrecios\n\t"
+				+  "\t"
+				+ this.lstCarrito.get(idCarrito).getLstItemCarrito();
+	}
 
 	@Override
 	public String toString() {

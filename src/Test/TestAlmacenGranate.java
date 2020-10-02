@@ -56,7 +56,7 @@ public class TestAlmacenGranate {
 		//Creamos el cliente para el carrito, hay que ver bien si lo instanciamos aca o donde
 		Cliente juan = null; 
 		try {
-			juan = new Cliente(1, null, "Juan", "Sanchez", 37608935);
+			juan = new Cliente(1, null, "Sanchez", "Juan", 37608935);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -79,6 +79,8 @@ public class TestAlmacenGranate {
 		}
 		
 		System.out.println(miComercio.toString());
+		System.out.println("--------------------");
+		System.out.println(miComercio.mostrarTicket(0));
 		
 		//Agregamos el articulo con id 1 al carrito (si se pasa un id que no existe, devuelve null pero la clase Carrito no lo agrega)
 		miComercio.traerCarrito(1).agregar(miComercio.traerArticulo(1), 3);
@@ -121,6 +123,8 @@ public class TestAlmacenGranate {
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+		//Probamos el ticket
+		System.out.println(miComercio.mostrarTicket(1));
 		//System.out.println(miComercio.traerCarrito(1).totalAPagarCarrito());
 		/*try {
 			Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
