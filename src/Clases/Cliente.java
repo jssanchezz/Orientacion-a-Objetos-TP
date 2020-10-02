@@ -10,18 +10,17 @@ public class Cliente extends Actor {
 
 	//Constructor
 	
-	public Cliente(int id, Contacto contacto, String apellido, String nombres, long dni) throws Exception {
-	super(id, contacto);
-	this.apellido = apellido;
-	this.nombres = nombres;
-	setDni(dni);
+	public Cliente(int id, String apellido, String nombres, String email, String celular, long dni) throws Exception {
+		super(id, new Contacto(email,celular));
+		this.apellido = apellido;
+		this.nombres = nombres;
+		setDni(dni);
 	}
 
 	public String getApellido() {
 		return apellido;
 	}
 
-	// Cualquier comprobacion de datos deberian pasar por los "Setters"
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
