@@ -110,12 +110,18 @@ public class TestAlmacenGranate {
 		//Aplicamos descuentos y mostramos el total con el descuento aplicado
 		miComercio.traerCarrito(1).agregar(miComercio.traerArticulo(1), 3);
 		try {
-			miComercio.traerCarrito(1).calcularDescuentoCarrito(miComercio.getDiaDescuento(), miComercio.getPorcentajeDescuentoDia(), miComercio.getPorcentajeDescuentoEfectivo());
+			System.out.println(miComercio.cobrarCarrito(1));
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		System.out.println(miComercio.traerCarrito(1));
-		System.out.println(miComercio.traerCarrito(1).totalAPagarCarrito());
+		//Aplicamos descuentos y mostramos el total con el descuento aplicado pero con otro metodo
+		try {
+			System.out.println("\n-------------------\n");
+			System.out.println(miComercio.cobrarCarrito(juan));
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		//System.out.println(miComercio.traerCarrito(1).totalAPagarCarrito());
 		/*try {
 			Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
 			Comercio comercio1 = null;

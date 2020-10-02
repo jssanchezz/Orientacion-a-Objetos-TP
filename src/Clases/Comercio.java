@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Comercio extends Actor{
 	
 	private String nombreComercio;
@@ -204,6 +205,18 @@ public class Comercio extends Actor{
 		return carrito;
 	}
 	
+	public Carrito traerCarrito(Cliente cliente) {
+		Carrito carrito = null;
+		int i = 0;
+		while(carrito==null && i<this.lstCarrito.size()) {
+			if(this.lstCarrito.get(i).getCliente().equals(cliente)) {
+				carrito = this.lstCarrito.get(i);
+			}
+			i++;
+		}
+		return carrito;
+	}
+	
 	public boolean existeCarritoAbierto(Cliente cliente) {
 		boolean existe = false;
 		int i = 0;
@@ -215,6 +228,32 @@ public class Comercio extends Actor{
 		}
 		return existe;
 	}
+	
+	public double cobrarCarrito(int carrito) throws Exception {
+		double total = 0;
+
+		if(!traerCarrito(carrito).isCerrado()) throw new Exception("Error el carrito no esta cerrado");
+		else{
+			traerCarrito(carrito).calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,
+					porcentajeDescuentoEfectivo);
+			total = traerCarrito(carrito).totalAPagarCarrito();
+			return total;
+		} 
+	}
+	
+	public double cobrarCarrito(Cliente cliente) throws Exception{
+		
+		double total = 0;
+		
+		if(!traerCarrito(cliente).isCerrado()) throw new Exception("Error el carrito no esta cerrado");
+		else{
+			traerCarrito(cliente).calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,
+					porcentajeDescuentoEfectivo);
+			total = traerCarrito(cliente).totalAPagarCarrito();
+			return total;
+		} 
+	}
+		
 	
 	public boolean validarIdentificadorUnico(long cuit) {
 		boolean valido = false;
