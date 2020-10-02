@@ -18,9 +18,10 @@ public class TestAlmacenGranate {
 		Contacto contacto1 = new Contacto("Felipe@gmail.com", "1164358765", null);
 		
 		Comercio miComercio = null;
-		
+		//Se crea el Comercio
 		try {
-			miComercio = new Comercio(2, contacto1, "Super Pepe", 30610252334l, 22.52, 14.55, 2, 6, 25);
+			System.out.println("--->Escenario 1: Se crea el Comercio<---");
+			miComercio = new Comercio(2,"Super Pepe","@gmail.com","1122554466",30610252334l,2,6,25);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -29,18 +30,22 @@ public class TestAlmacenGranate {
 
 		//Lo agrega
 		try {
+			System.out.println("--->Escenario 2.A: Se Agrega un articulo al Comercio<---");
 			miComercio.agregarArticulo("Lapicera", "6937733560324", 10);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println(miComercio.);
 		//No agrega porque repite
 		try {
+			System.out.println("--->Escenario 2.B: Se intenta agregar un articulo ya existente al comercio<---");
 			miComercio.agregarArticulo("Lapicera", "6937733560324", 10);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		//No agrega por codigo invalido
 		try {
+			System.out.println("--->Escenario 2.C: Se intenta agregar un articulo que posee un codigo de barras invalido<---");
 			miComercio.agregarArticulo("Nutella", "27898024394181", 340);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -54,9 +59,11 @@ public class TestAlmacenGranate {
 				
 		
 		//Creamos el cliente para el carrito, hay que ver bien si lo instanciamos aca o donde
-		Cliente juan = null; 
+		Cliente juan = null;
+
 		try {
-			juan = new Cliente(1, null, "Sanchez", "Juan", 37608935);
+			//juan = new Cliente(1, null, "Sanchez", "Juan", 37608935);
+			juan = new Cliente(3,"Sanchez","Juan","@gmail.com","1111111111",38355972l);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -68,6 +75,7 @@ public class TestAlmacenGranate {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println(miComercio.toString());
 		
 		miComercio.traerCarrito(1).setCerrado(true);
 		
@@ -78,12 +86,10 @@ public class TestAlmacenGranate {
 			System.out.println(e.getMessage());
 		}
 		
-		System.out.println(miComercio.toString());
-		System.out.println("--------------------");
-		System.out.println(miComercio.mostrarTicket(0));
 		
 		//Agregamos el articulo con id 1 al carrito (si se pasa un id que no existe, devuelve null pero la clase Carrito no lo agrega)
 		miComercio.traerCarrito(1).agregar(miComercio.traerArticulo(1), 3);
+		miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(1), 3);///////////////
 		System.out.println(miComercio.traerCarrito(1));
 		
 		//Sacamos una cantidad menor a la total
@@ -112,7 +118,7 @@ public class TestAlmacenGranate {
 		//Aplicamos descuentos y mostramos el total con el descuento aplicado
 		miComercio.traerCarrito(1).agregar(miComercio.traerArticulo(1), 3);
 		try {
-			System.out.println(miComercio.cobrarCarrito(1));
+			System.out.println(miComercio.cobrarCarrito(0));
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}

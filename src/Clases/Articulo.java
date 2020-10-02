@@ -104,11 +104,15 @@ public class Articulo {
 		return false;
 	}	
 
-	@Override
-	public String toString() {
-		return "Articulo [id=" + id + ", nombre=" + nombre + ", codBarras=" + codBarras + ", precio=" + precio + "]";
+	public String TraerArticulo() {
+		return nombre + "\t" + precio;
 	}
 	
+	@Override
+	public String toString() {
+		return  id + " " + nombre + " precio: " + precio + " codBarras: " + codBarras + "\n\t " ;
+	}
+
 	
 	
 }

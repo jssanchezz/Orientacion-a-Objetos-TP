@@ -197,12 +197,13 @@ public class Carrito {
 	public double totalAPagarCarrito() {
 		return calcularTotalCarrito() - descuento;
 	}
-
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Carrito [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", cerrado=" + cerrado + ", descuento="
-				+ descuento + ", cliente=" + cliente + ", lstItemCarrito=" + lstItemCarrito + ", entrega=" + entrega
-				+ "]";
+		return "id " + id + " fecha: " + fecha + " hora: " + hora + " cerrado: " + cerrado + " descuento: "
+				+ descuento + " cliente: " + cliente + " Items en carrito: " + lstItemCarrito + " entrega: " + entrega + "\n  \t";
 	}
 
 }

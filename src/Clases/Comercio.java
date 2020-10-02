@@ -228,6 +228,7 @@ public class Comercio extends Actor{
 		return cobrarCarrito(traerCarrito(idCarrito).getCliente());
 	}
 	
+	
 	public double cobrarCarrito(Cliente cliente) throws Exception{
 		
 		Carrito carrito = traerCarrito(cliente);
@@ -270,19 +271,18 @@ public class Comercio extends Actor{
 	}
 
 	public String mostrarTicket(int idCarrito) {
-		return "El Carrito es el numero " + this.lstCarrito.get(idCarrito).getId() + "° \nNombre: "
-				+ this.lstCarrito.get(idCarrito).getCliente() + "\n\tProductos\tPrecios\n\t"
-				+  "\t"
-				+ this.lstCarrito.get(idCarrito).getLstItemCarrito();
+		return "El Carrito es el numero: " + this.lstCarrito.get(idCarrito).getId() + "°\n"
+				+ this.lstCarrito.get(idCarrito).getCliente() + "\nID\tProductos\tPrecios \tCantidad\n"
+				+ this.lstCarrito.get(idCarrito).getLstItemCarrito() + "\nEste es el descuento del precio total: $"
+				+ -this.lstCarrito.get(idCarrito).getDescuento() + "\nEste es el total: $" + this.lstCarrito.get(idCarrito).totalAPagarCarrito()
+				 ;
 	}
 
 	@Override
 	public String toString() {
-		return "\tComercio \nnombreComercio= " + nombreComercio + ", \ncuit= " + cuit + ", \ncostoFijo= " + costoFijo
-				+ ", \ncostoPorKm= " + costoPorKm + ", \ndiaDescuento= " + diaDescuento + ", \nporcentajeDescuentoDia= "
-				+ porcentajeDescuentoDia + ", \nporcentajeDescuentoEfectivo=" + porcentajeDescuentoEfectivo
-				+ ", \nlstDiaRetiro= " + lstDiaRetiro + ", \nlstArticulo= " + lstArticulo + ", \nlstCarrito= " + lstCarrito;
+		return "\tComercio \nNombre del comercio: " + nombreComercio + " \ncuit: " + cuit + " \nCosto fijo: " + costoFijo
+				+ " \nCosto por km: " + costoPorKm + " \nDescuento del dia: " + diaDescuento + " \nporcentajeDescuentoDia: "
+				+ porcentajeDescuentoDia + " \nporcentajeDescuentoEfectivo: " + porcentajeDescuentoEfectivo
+				+ " \nDias de retiro: " + lstDiaRetiro + " \nArticulos en el supermercado:\n\t" + lstArticulo + "\t" + " \nCarritos: " + lstCarrito;
 	}
-	
-
 }
