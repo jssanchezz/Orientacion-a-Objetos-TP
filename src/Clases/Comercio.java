@@ -21,19 +21,24 @@ public class Comercio extends Actor{
 	
 	//Constructor
 	
-	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento,
-			int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) throws Exception {
+	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) throws Exception{
 		super(id, contacto);
 		this.nombreComercio = nombreComercio;
 		setCuit(cuit);
-		this.costoFijo = costoFijo;
-		this.costoPorKm = costoPorKm;
 		this.diaDescuento = diaDescuento;
 		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
+		this.costoFijo = 0;
+		this.costoPorKm = 0;
 		this.lstDiaRetiro = new ArrayList<DiaRetiro>();
 		this.lstArticulo = new ArrayList<Articulo>();
 		this.lstCarrito = new ArrayList<Carrito>();
+	}
+	
+	public Comercio(int id, Contacto contacto, String nombreComercio, long cuit, double costoFijo, double costoPorKm, int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) throws Exception {
+		this(id,contacto,nombreComercio,cuit,diaDescuento,porcentajeDescuentoDia,porcentajeDescuentoEfectivo);
+		this.costoFijo = costoFijo;
+		this.costoPorKm = costoPorKm;		
 	}
 	
 	
