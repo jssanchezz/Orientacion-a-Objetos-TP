@@ -283,7 +283,7 @@ public class Comercio extends Actor{
 	}
 
 	public void imprimirCarritos(){
-		System.out.println("ID\tNOMBRE\tPRECIO\tCODIGO");
+		System.out.println("\t\t\t\t\t\tCARRITOS");
 		for(Carrito c: this.lstCarrito){
 			System.out.println(c.toString());
 		}

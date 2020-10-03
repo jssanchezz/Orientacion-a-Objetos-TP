@@ -62,7 +62,7 @@ public class TestAlmacenGranate {
 
 		//Agregamos un nuevo articulo y verificamos el incremento del id
 		try {
-			System.out.println("--->Escenario 2.D: Se agrega un nuevo articulo<---");//Fijarse si se queda o se va
+			System.out.println("--->Escenario 2.D: Se agrega un nuevo articulo<---");
 			miComercio.agregarArticulo("Bic", "6921734966469", 10);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
