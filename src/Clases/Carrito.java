@@ -105,10 +105,10 @@ public class Carrito {
 	
 	//metodos de clase
 	
-	public boolean agregar(Articulo articulo, int cantidad) {
+	public boolean agregar(Articulo articulo, int cantidad) throws Exception{
 		
-		if(articulo == null)
-			return false; //Agregué esto para que no se inserten articulos en null
+		if(articulo == null) throw new Exception("Articulo inválido (no existe)");
+		if(this.isCerrado()) throw new Exception("El carrito se encuentra cerrado.");
 		
 		ItemCarrito aux = traerItem(articulo);
 		if(aux!=null) {
@@ -203,7 +203,20 @@ public class Carrito {
 	@Override
 	public String toString() {
 		return "id " + id + " fecha: " + fecha + " hora: " + hora + " cerrado: " + cerrado + " descuento: "
-				+ descuento + " cliente: " + cliente + " Items en carrito: " + lstItemCarrito + " entrega: " + entrega + "\n  \t";
+				+ descuento + " cliente: " + cliente;
+	}
+
+	public void imprimirListadoItems(){
+		System.out.println("ID\tART.\tPRECIO\tCODIGO\t\t\tCANTIDAD");
+		for(ItemCarrito i: this.lstItemCarrito){
+			System.out.println(i.toString());
+		}
+	}
+
+	public void mostrarTicket() {
+		System.out.println("El Carrito es el numero: " + this.getId());
+		this.imprimirListadoItems();
+		System.out.println("Este es el descuento del precio total: $"+ this.getDescuento() + "\nEste es el total: $" + this.totalAPagarCarrito());
 	}
 
 }

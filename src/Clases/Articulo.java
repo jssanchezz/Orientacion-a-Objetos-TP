@@ -110,7 +110,7 @@ public class Articulo {
 	
 	@Override
 	public String toString() {
-		return  id + " " + nombre + " precio: " + precio + " codBarras: " + codBarras + "\n\t " ;
+		return  id + "\t" + nombre + "\t" + precio + "\t" + codBarras + "\t" ;
 	}
 
 	

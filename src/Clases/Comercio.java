@@ -222,14 +222,14 @@ public class Comercio extends Actor{
 		return carrito;
 	}
 	
-	public double cobrarCarrito(int idCarrito) throws Exception {
+	public void cobrarCarrito(int idCarrito) throws Exception {
 		Carrito carrito = traerCarrito(idCarrito);
 		if(carrito==null) throw new Exception("No existe carrito.");
-		return cobrarCarrito(traerCarrito(idCarrito).getCliente());
+		cobrarCarrito(traerCarrito(idCarrito).getCliente());
 	}
 	
 	
-	public double cobrarCarrito(Cliente cliente) throws Exception{
+	public void cobrarCarrito(Cliente cliente) throws Exception{
 		
 		Carrito carrito = traerCarrito(cliente);
 		
@@ -239,7 +239,6 @@ public class Comercio extends Actor{
 		
 		carrito.setCerrado(true);
 		carrito.calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,porcentajeDescuentoEfectivo);
-		return carrito.totalAPagarCarrito();
 	}
 		
 	
@@ -270,19 +269,23 @@ public class Comercio extends Actor{
 		return valido;
 	}
 
-	public String mostrarTicket(int idCarrito) {
-		return "El Carrito es el numero: " + this.lstCarrito.get(idCarrito).getId() + "°\n"
-				+ this.lstCarrito.get(idCarrito).getCliente() + "\nID\tProductos\tPrecios \tCantidad\n"
-				+ this.lstCarrito.get(idCarrito).getLstItemCarrito() + "\nEste es el descuento del precio total: $"
-				+ -this.lstCarrito.get(idCarrito).getDescuento() + "\nEste es el total: $" + this.lstCarrito.get(idCarrito).totalAPagarCarrito()
-				 ;
-	}
-
 	@Override
 	public String toString() {
-		return "\tComercio \nNombre del comercio: " + nombreComercio + " \ncuit: " + cuit + " \nCosto fijo: " + costoFijo
-				+ " \nCosto por km: " + costoPorKm + " \nDescuento del dia: " + diaDescuento + " \nporcentajeDescuentoDia: "
-				+ porcentajeDescuentoDia + " \nporcentajeDescuentoEfectivo: " + porcentajeDescuentoEfectivo
-				+ " \nDias de retiro: " + lstDiaRetiro + " \nArticulos en el supermercado:\n\t" + lstArticulo + "\t" + " \nCarritos: " + lstCarrito;
+		return "\tComercio \nNombre del comercio: " + nombreComercio + " \ncuit: " + cuit + " \nDescuento del dia: " + diaDescuento + " \nporcentajeDescuentoDia: "
+				+ porcentajeDescuentoDia + " \nporcentajeDescuentoEfectivo: " + porcentajeDescuentoEfectivo ;
+	}
+
+	public void imprimirArticulos(){
+		System.out.println("ID\tNOMBRE\tPRECIO\tCODIGO");
+		for(Articulo a: this.lstArticulo){
+			System.out.println(a.toString());
+		}
+	}
+
+	public void imprimirCarritos(){
+		System.out.println("ID\tNOMBRE\tPRECIO\tCODIGO");
+		for(Carrito c: this.lstCarrito){
+			System.out.println(c.toString());
+		}
 	}
 }
