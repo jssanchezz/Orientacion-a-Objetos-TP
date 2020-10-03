@@ -207,7 +207,7 @@ public class Carrito {
 	}
 
 	public void imprimirListadoItems(){
-		System.out.println("ID\tART.\tPRECIO\tCODIGO\t\t\tCANTIDAD");
+		System.out.println("ID\tART.\tPRECIO\tCODIGO\t\t\tCANTIDAD\tSUBTOTAL");
 		for(ItemCarrito i: this.lstItemCarrito){
 			System.out.println(i.toString());
 		}

@@ -33,7 +33,7 @@ public class ItemCarrito {
 
 	@Override
 	public String toString() {
-		return articulo + "\t" + cantidad;
+		return articulo + "\t" + cantidad + "\t\t" + calcularSubTotalItem();
 	}
 
 	
