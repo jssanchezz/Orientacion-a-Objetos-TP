@@ -40,4 +40,10 @@ public class Turno {
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
+
+	@Override
+	public String toString() {
+		return "Turno [dia=" + dia + ", hora=" + hora + ", ocupado=" + ocupado + "]";
+	}
+	
 }

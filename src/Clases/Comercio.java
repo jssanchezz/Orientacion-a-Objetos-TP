@@ -177,7 +177,7 @@ public class Comercio extends Actor{
 	}
 	
 		
-	public boolean agregarCarrito(LocalDate fecha, LocalTime hora, Cliente cliente) throws Exception {
+	public boolean agregarCarrito(LocalDate fecha, LocalTime hora, Cliente cliente,Entrega entrega) throws Exception {
 		
 		if(traerCarrito(cliente)!=null) {
 			throw new Exception ("El cliente posee carrito abierto.");
@@ -186,7 +186,7 @@ public class Comercio extends Actor{
 		if(this.lstCarrito.size()>0) {
 			id = this.lstCarrito.get(this.lstCarrito.size()-1).getId()+1;
 		}
-		return this.lstCarrito.add(new Carrito(id, fecha, hora, cliente));
+		return this.lstCarrito.add(new Carrito(id, fecha, hora, cliente, entrega));
 	}
 	
 	
@@ -267,6 +267,41 @@ public class Comercio extends Actor{
                   
 		}
 		return valido;
+	}
+	
+	
+	public List<LocalTime> multiplestraerHoraRetiro(LocalDate fecha) {
+		List<LocalTime> horas = new ArrayList<LocalTime>();
+		int i = 0;
+		while(i<this.lstCarrito.size()) {
+			horas.add(this.lstCarrito.get(i).traerHoraRetiro(fecha));
+			i++;
+			}
+		return horas;
+	}
+	
+	
+	public List<Turno> generarTurnosLibres(LocalDate fecha){
+		List<Turno> Turnos = new ArrayList<Turno>();
+		List<LocalTime> horas = multiplestraerHoraRetiro(fecha);
+				for(LocalTime i = LocalTime.of(12, 00);i.isBefore(LocalTime.of(20, 15));i = i.plusMinutes(15L)){
+						Turnos.add(new Turno(fecha,i,false));					
+				}
+		return Turnos;
+	}
+	
+	public List<Turno> generarTurnosOcupados(LocalDate fecha){
+		List<Turno> Turnos = generarTurnosLibres(fecha);
+		List<LocalTime> horas = multiplestraerHoraRetiro(fecha);
+		for(Turno t: Turnos) {
+			for(LocalTime h : horas) {
+				if(t.getHora().equals(h)) {
+					t.setOcupado(true);
+				}
+				
+			}
+		}
+		return Turnos;
 	}
 
 	@Override
