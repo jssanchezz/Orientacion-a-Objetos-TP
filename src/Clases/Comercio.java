@@ -270,7 +270,7 @@ public class Comercio extends Actor{
 	}
 	
 	
-	public List<LocalTime> multiplestraerHoraRetiro(LocalDate fecha) {
+	public List<LocalTime> TraerTodasHoraRetiro(LocalDate fecha) {
 		List<LocalTime> horas = new ArrayList<LocalTime>();
 		int i = 0;
 		while(i<this.lstCarrito.size()) {
@@ -283,7 +283,7 @@ public class Comercio extends Actor{
 	
 	public List<Turno> generarTurnosLibres(LocalDate fecha){
 		List<Turno> Turnos = new ArrayList<Turno>();
-		List<LocalTime> horas = multiplestraerHoraRetiro(fecha);
+		List<LocalTime> horas = TraerTodasHoraRetiro(fecha);
 				for(LocalTime i = LocalTime.of(12, 00);i.isBefore(LocalTime.of(20, 15));i = i.plusMinutes(15L)){
 						Turnos.add(new Turno(fecha,i,false));					
 				}
@@ -292,7 +292,7 @@ public class Comercio extends Actor{
 	
 	public List<Turno> generarTurnosOcupados(LocalDate fecha){
 		List<Turno> Turnos = generarTurnosLibres(fecha);
-		List<LocalTime> horas = multiplestraerHoraRetiro(fecha);
+		List<LocalTime> horas = TraerTodasHoraRetiro(fecha);
 		for(Turno t: Turnos) {
 			for(LocalTime h : horas) {
 				if(t.getHora().equals(h)) {

@@ -213,7 +213,7 @@ public class TestAlmacenGranate {
 		}
 		System.out.println("--->Fin del caso de uso:Cerrar carrito<---");
 		try {
-			Horas = miComercio.multiplestraerHoraRetiro(LocalDate.of(2020, 10, 11));
+			Horas = miComercio.TraerTodasHoraRetiro(LocalDate.of(2020, 10, 11));
 			System.out.println("--------");
 			for (LocalTime h : Horas) {
 				System.out.println("--" + h);
