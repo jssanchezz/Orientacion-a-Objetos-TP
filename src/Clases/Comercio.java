@@ -282,28 +282,55 @@ public class Comercio extends Actor{
 	
 	
 	public List<Turno> generarTurnosLibres(LocalDate fecha){
-		List<Turno> Turnos = new ArrayList<Turno>();
-		List<LocalTime> horas = TraerTodasHoraRetiro(fecha);
-				for(LocalTime i = LocalTime.of(12, 00);i.isBefore(LocalTime.of(20, 15));i = i.plusMinutes(15L)){
-						Turnos.add(new Turno(fecha,i,false));					
+		List<Turno> TurnosLibres = new ArrayList<Turno>();
+		List<LocalTime> TurnosOcupados = TraerTodasHoraRetiro(fecha);
+		boolean match = false;
+		int contador;
+		DiaRetiro diaActual = traerDiaRetiro(fecha);
+		long intervalo = 15;
+		
+				for(LocalTime i = LocalTime.of(10, 00);i.isBefore(LocalTime.of(20, 00));i = i.plusMinutes(15l)){
+					contador = 0;
+					while(contador < TurnosOcupados.size() && !match) {
+						if(!TurnosOcupados.get(contador).equals(i)){
+							TurnosLibres.add(new Turno(fecha,i,false));
+//							TurnosLibres.remove(index);
+							match = true;
+						}
+						contador++;
+					}
+					match = false;
 				}
-		return Turnos;
+					/*for(LocalTime i = LocalTime.of(10, 00);i.isBefore(LocalTime.of(20, 00));i = i.plusMinutes(15l)){
+						TurnosLibres.add(new Turno(fecha,i,false));
+					}*/
+		
+		return TurnosLibres;
 	}
 	
 	public List<Turno> generarTurnosOcupados(LocalDate fecha){
-		List<Turno> Turnos = generarTurnosLibres(fecha);
+		List<Turno> TurnosLibres = generarTurnosLibres(fecha);
+		List<Turno> TurnosOcupados = new ArrayList<Turno>();
 		List<LocalTime> horas = TraerTodasHoraRetiro(fecha);
-		for(Turno t: Turnos) {
-			for(LocalTime h : horas) {
-				if(t.getHora().equals(h)) {
+		int i = 0;
+		boolean match = false;
+		
+		for(Turno t: TurnosLibres) {
+			i = 0;
+			while(i < horas.size() && !match) {
+				if(t.getHora().equals(horas.get(i))) {
 					t.setOcupado(true);
+					TurnosOcupados.add(t);
+					match = true;
 				}
-				
+			i++;
 			}
+			match = false;
 		}
-		return Turnos;
+		return TurnosOcupados;
 	}
-	public boolean agregarDiaRetiro(int diaSemana, LocalTime horaDesde, LocalTime horaHasta, int intervalo)throws Exception {
+	
+	/*public boolean agregarDiaRetiro(int diaSemana, LocalTime horaDesde, LocalTime horaHasta, int intervalo)throws Exception {
 		if(traerDiaRetiro(fecha) != null) {
 			throw new Exception ("Dia incoerrecto");
 		}
@@ -312,7 +339,7 @@ public class Comercio extends Actor{
 			id = this.lstDiaRetiro.get(this.lstDiaRetiro.size()-1).getId()+1;
 			return this.lstDiaRetiro.add(new DiaRetiro(id, diaSemana, horaDesde, horaHasta, intervalo));
 		}
-	}
+	}*/
 	
 	public DiaRetiro traerDiaRetiro(LocalDate fecha) {
 		DiaRetiro dia = null;
@@ -325,6 +352,7 @@ public class Comercio extends Actor{
 		}
 		return dia;
 	}
+	
 	public List <LocalTime> traerHoraRetiro(LocalDate fecha) {
 		List <LocalTime> horas= new ArrayList <LocalTime>();
 		for(Carrito c: lstCarrito) {
@@ -335,7 +363,7 @@ public class Comercio extends Actor{
 		}return horas;
 	}
 	
-	public List<Turno> generarTurnosLibres(LocalDate fecha){
+	/*public List<Turno> generarTurnosLibres(LocalDate fecha){
 		DiaRetiro d= traerDiaRetiro (fecha);
 		List <Turno> turno= new ArrayList <Turno>();
 		if(d != null) {
@@ -349,9 +377,9 @@ public class Comercio extends Actor{
 				}
 			}
 		}return turno;
-	}
+	}*/
 	
-	public List<Turno> traerTurnosOcupados(LocalDate fecha){
+	/*public List<Turno> traerTurnosOcupados(LocalDate fecha){
 		DiaRetiro d= traerDiaRetiro(fecha);
 		List <Turno>turnosOcupados= new ArrayList <Turno>();
 		List <Turno>turnosLibres=generarTurnosLibres(fecha);
@@ -366,12 +394,12 @@ public class Comercio extends Actor{
 				}
 			}
 		}return turnosOcupados;
-	}
+	}*/
 
 	public List<Turno> generarAgenda (LocalDate fecha){
 		List <Turno> agenda= new ArrayList <Turno>();
 		List <Turno> turnosLibres = generarTurnosLibres(fecha);
-		List <Turno> turnosOcupados = traerTurnosOcupados(fecha);
+		List <Turno> turnosOcupados = generarTurnosOcupados(fecha);
 		if(turnosOcupados.isEmpty()==true) {
 			for(int i=0; i<7 ; i++) {
 				if(turnosLibres.get(i).getDia().equals(fecha)) {
