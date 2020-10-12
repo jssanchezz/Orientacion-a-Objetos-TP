@@ -198,14 +198,14 @@ public class Carrito {
 		return calcularTotalCarrito() - descuento;
 	}
 	
-	public LocalTime traerHoraRetiro(LocalDate fecha) {
+	/*public LocalTime traerHoraRetiro(LocalDate fecha) {
 		LocalTime hora = null;
 			if(entrega instanceof RetiroLocal) {
 				RetiroLocal retiro = (RetiroLocal)entrega;
 				if(retiro.getFecha().isEqual(fecha)) hora = retiro.getHoraEntrega();
 			}
 			return hora;
-	}
+	}*/
 	
 	@Override
 	public String toString() {

@@ -27,6 +27,7 @@ public class TestAlmacenGranate {
 		Entrega retiro2 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(13, 30));
 		List<Turno> Turnos = new ArrayList<Turno>();
 		List<LocalTime> Horas = new ArrayList<LocalTime>();
+		
 
 		// CASO DE USO: CREAR COMERCIO -> Se crea miComercio correctamente, miComercio 2
 		// contiene cuit invalido y lanza excepcion
@@ -203,6 +204,7 @@ public class TestAlmacenGranate {
 			System.out.println(e.getMessage());
 		}
 
+		miComercio.getLstDiaRetiro().add(new DiaRetiro(0,7,LocalTime.of(10, 00), LocalTime.of(15, 00),15));
 		// El carrito ya esta cerrado, lanza excepcion
 		try {
 			System.out.println("--->Escenario 6.C: Se intenta cobrar otra vez a alguien que ya ha sido cobrado<---");
@@ -213,19 +215,22 @@ public class TestAlmacenGranate {
 		}
 		System.out.println("--->Fin del caso de uso:Cerrar carrito<---");
 		try {
-			Horas = miComercio.TraerTodasHoraRetiro(LocalDate.of(2020, 10, 11));
+			Horas = miComercio.traerHoraRetiro(LocalDate.of(2020, 10, 11));
 			System.out.println("--------");
 			for (LocalTime h : Horas) {
 				System.out.println("--" + h);
 			}
 			System.out.println("--------");
-			Turnos = miComercio.generarTurnosOcupados(LocalDate.of(2020, 10, 11));
+			Turnos = miComercio.generarAgenda(LocalDate.of(2020, 10, 11));
 			for (Turno t : Turnos) {
 				System.out.println("--" + t);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+			
 	}
+	
+	
 
 }
