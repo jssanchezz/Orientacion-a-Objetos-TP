@@ -21,27 +21,20 @@ public class Comercio extends Actor{
 	
 	//Constructor
 	
-	public Comercio(int id, String nombreComercio, String email, String celular, long cuit, int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) throws Exception{
-		super(id, new Contacto(email,celular));
+	public Comercio(int id, String nombreComercio, String email, String celular, long cuit, double costoFijo, double costoPorKm, int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo, Ubicacion ubicacion) throws Exception{
+		super(id, new Contacto(email,celular, ubicacion));
 		this.nombreComercio = nombreComercio;
 		setCuit(cuit);
 		this.diaDescuento = diaDescuento;
 		this.porcentajeDescuentoDia = porcentajeDescuentoDia;
 		this.porcentajeDescuentoEfectivo = porcentajeDescuentoEfectivo;
-		this.costoFijo = 0;
-		this.costoPorKm = 0;
+		this.costoFijo = costoFijo;
+		this.costoPorKm = costoPorKm;
 		this.lstDiaRetiro = new ArrayList<DiaRetiro>();
 		this.lstArticulo = new ArrayList<Articulo>();
 		this.lstCarrito = new ArrayList<Carrito>();
 	}
-	
-	public Comercio(int id, String nombreComercio, String email, String celular,long cuit, double costoFijo, double costoPorKm, int diaDescuento, int porcentajeDescuentoDia, int porcentajeDescuentoEfectivo) throws Exception {
-		this(id,nombreComercio,email,celular,cuit,diaDescuento,porcentajeDescuentoDia,porcentajeDescuentoEfectivo);
-		this.costoFijo = costoFijo;
-		this.costoPorKm = costoPorKm;		
-	}
-	
-	
+		
 	//Getters y setters
 
 	public String getNombreComercio() {
@@ -239,6 +232,10 @@ public class Comercio extends Actor{
 		
 		carrito.setCerrado(true);
 		carrito.calcularDescuentoCarrito(diaDescuento, porcentajeDescuentoDia,porcentajeDescuentoEfectivo);
+		if(carrito.getEntrega()instanceof Envio) {
+			Envio envio = (Envio)carrito.getEntrega();
+			envio.calcularCostoEnvio(this.getContacto().getUbicacion().getLatitud(), this.getContacto().getUbicacion().getLongitud(), costoFijo, costoPorKm);
+		}
 	}
 		
 	

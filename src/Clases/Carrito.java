@@ -191,21 +191,20 @@ public class Carrito {
 	}
 	
 	public double calcularDescuentoEfectivo(double porcentajeDescuentoEfectivo) {
-		return this.calcularTotalCarrito()*(porcentajeDescuentoEfectivo/100);
+		if(this.entrega.isEfectivo())
+			return this.calcularTotalCarrito()*(porcentajeDescuentoEfectivo/100);
+		return 0;
 	}
 	
 	public double totalAPagarCarrito() {
-		return calcularTotalCarrito() - descuento;
+		double total = calcularTotalCarrito();
+		total -= descuento;
+		if(this.entrega instanceof Envio) {
+			total += ((Envio)this.entrega).getCosto();
+			System.out.println("Costo: "+ ((Envio)this.entrega).getCosto());
+		}
+		return total;
 	}
-	
-	/*public LocalTime traerHoraRetiro(LocalDate fecha) {
-		LocalTime hora = null;
-			if(entrega instanceof RetiroLocal) {
-				RetiroLocal retiro = (RetiroLocal)entrega;
-				if(retiro.getFecha().isEqual(fecha)) hora = retiro.getHoraEntrega();
-			}
-			return hora;
-	}*/
 	
 	@Override
 	public String toString() {

@@ -10,6 +10,7 @@ import Clases.Entrega;
 import Clases.Envio;
 import Clases.RetiroLocal;
 import Clases.Turno;
+import Clases.Ubicacion;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,7 +23,7 @@ public class TestAlmacenGranate {
 	public static void main(String[] args) {
 	
 		Comercio miComercio = null;
-		Entrega retiro = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 30));
+		Entrega envioPaCasa = new Envio(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 30), LocalTime.of(13, 00), null);
 		Entrega retiro1 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 45));
 		Entrega retiro2 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(13, 30));
 		List<Turno> Turnos = new ArrayList<Turno>();
@@ -33,8 +34,8 @@ public class TestAlmacenGranate {
 		// contiene cuit invalido y lanza excepcion
 		System.out.println("--->Escenario 1.A: Se crea el Comercio<---");
 		try {
-			miComercio = new Comercio(2, "Super Pepe", "@gmail.com", "1122554466", 30610252334l, 2, 6, 25);
-			Comercio miComercio2 = new Comercio(2, "Invalida", "@gmail.com", "1234567890", 33123456l, 2, 6, 25);
+			miComercio = new Comercio(2, "Super Pepe", "@gmail.com", "1122554466", 30610252334l, 200, 53, 2, 6, 25, new Ubicacion(-34.736039, -58.391270));
+			Comercio miComercio2 = new Comercio(2, "Invalida", "@gmail.com", "1234567890", 33123456l, 300, 23, 2, 6, 25,new Ubicacion(34.79, 58.37));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -93,13 +94,17 @@ public class TestAlmacenGranate {
 		try {
 			System.out.println(
 					"--->Escenario 3.A: Se crea un cliente con datos validos[Juan] y otros con datos invalidos[Pedro]<---");
-			juan = new Cliente(3, "Sanchez", "Juan", "@gmail.com", "1111111111", 38355972l);
-			rolando = new Cliente(4, "Rapali", "Rolando", "@gmail.com", "1111111111", 17252301l);
-			Cliente pedro = new Cliente(1, "Gomez", "Pedro", "@gmail.com", "1111111111", 1234l);
+			juan = new Cliente(3, "Sanchez", "Juan", "@gmail.com", "1111111111", 38355972l, new Ubicacion(-34.800499, -58.388777));
+			rolando = new Cliente(4, "Rapali", "Rolando", "@gmail.com", "1111111111", 17252301l, new Ubicacion(-34.80, 12.87));
+			Cliente pedro = new Cliente(1, "Gomez", "Pedro", "@gmail.com", "1111111111", 1234l, new Ubicacion(-34.80, 12.87));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+		((Envio)envioPaCasa).setUbicacion(juan.getContacto().getUbicacion());
+
+				
 
 		System.out.println("--->Fin del caso de uso:Crear cliente<---\n");
 		// CASO DE USO: AGREGAR CARRITO
@@ -109,9 +114,9 @@ public class TestAlmacenGranate {
 		try {
 			System.out.println(
 					"--->Escenario 4.A: Se intenta agregar un carrito nuevo a un cliente que tiene un carrito abierto<---");
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, retiro);
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), rolando, retiro2);
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, retiro);
+			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, envioPaCasa);
+			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), rolando, envioPaCasa);
+			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, envioPaCasa);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -190,11 +195,11 @@ public class TestAlmacenGranate {
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(4), 1);
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(5), 2);
 			miComercio.cobrarCarrito(2);
-			miComercio.imprimirCarritos();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
+		miComercio.imprimirCarritos();
 		// Probamos el ticket
 		try {
 			System.out.println(
@@ -230,7 +235,4 @@ public class TestAlmacenGranate {
 		}
 			
 	}
-	
-	
-
 }

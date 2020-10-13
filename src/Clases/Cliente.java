@@ -10,8 +10,8 @@ public class Cliente extends Actor {
 
 	//Constructor
 	
-	public Cliente(int id, String apellido, String nombres, String email, String celular, long dni) throws Exception {
-		super(id, new Contacto(email,celular));
+	public Cliente(int id, String apellido, String nombres, String email, String celular, long dni, Ubicacion ubicacion) throws Exception {
+		super(id, new Contacto(email,celular,ubicacion));
 		this.apellido = apellido;
 		this.nombres = nombres;
 		setDni(dni);

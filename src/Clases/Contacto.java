@@ -8,18 +8,11 @@ public class Contacto {
 	
 	//Constructor
 	
-	public Contacto(String email, String celular) {
+	public Contacto(String email, String celular, Ubicacion ubicacion) {
 		this.email = email;
 		this.celular = celular;
-		this.ubicacion = null;
-	}
-	
-	public Contacto(String email, String celular, Ubicacion ubicacion) {
-		this(email,celular);
 		this.ubicacion = ubicacion;
-	}
-	
-	
+	}	
 	
 	//Getters y setters
 	
