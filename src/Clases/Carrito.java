@@ -107,7 +107,7 @@ public class Carrito {
 	
 	public boolean agregar(Articulo articulo, int cantidad) throws Exception{
 		
-		if(articulo == null) throw new Exception("Articulo inválido (no existe)");
+		if(articulo == null) throw new Exception("Articulo inválido");
 		if(this.isCerrado()) throw new Exception("El carrito se encuentra cerrado.");
 		
 		ItemCarrito aux = traerItem(articulo);
@@ -158,13 +158,6 @@ public class Carrito {
 		return total;
 	}
 	
-	public boolean equals(Carrito carrito) {
-		if(this.cliente.equals(carrito.cliente)) {
-			return true;
-		}
-		return false;
-	}
-	
 	public void calcularDescuentoCarrito(int diaDescuento, double porcentajeDescuento, double porcentajeDescuentoEfectivo) {
 		double descuento = 0;
 		if(calcularDescuentoDia(diaDescuento, porcentajeDescuento) >= calcularDescuentoEfectivo(porcentajeDescuentoEfectivo))
@@ -201,7 +194,6 @@ public class Carrito {
 		total -= descuento;
 		if(this.entrega instanceof Envio) {
 			total += ((Envio)this.entrega).getCosto();
-			System.out.println("Costo del envio: $"+ ((Envio)this.entrega).getCosto());
 		}
 		return total;
 	}
@@ -210,6 +202,13 @@ public class Carrito {
 	public String toString() {
 		return "id " + id + " fecha: " + fecha + " hora: " + hora + " cerrado: " + cerrado + " descuento: "
 				+ descuento + " cliente: " + cliente;
+	}
+	
+	public boolean equals(Carrito carrito) {
+		if(this.cliente.equals(carrito.cliente)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void imprimirListadoItems(){
@@ -222,7 +221,10 @@ public class Carrito {
 	public void mostrarTicket() {
 		System.out.println("El Carrito es el numero: " + this.getId());
 		this.imprimirListadoItems();
-		System.out.println("Este es el descuento del precio total: $"+ this.getDescuento() + "\nEste es el total(Con el precio del envio incluido): $" + this.totalAPagarCarrito());
+		System.out.println("SubTotal: $" + this.calcularTotalCarrito());
+		if(this.descuento>0) System.out.println("Descuento: -$"+ this.getDescuento());
+		if(this.entrega instanceof Envio) System.out.println("Costo de envio: $" + ((Envio)this.entrega).getCosto());
+		System.out.println("Total: $" + this.totalAPagarCarrito());		
 	}
 
 }

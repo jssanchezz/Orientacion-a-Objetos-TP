@@ -1,10 +1,7 @@
 package Test;
 
-import Clases.Articulo;
-import Clases.Carrito;
 import Clases.Cliente;
 import Clases.Comercio;
-import Clases.Contacto;
 import Clases.DiaRetiro;
 import Clases.Entrega;
 import Clases.Envio;

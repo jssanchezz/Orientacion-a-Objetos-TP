@@ -134,15 +134,6 @@ public class Comercio extends Actor{
 		}
 		return this.getLstArticulo().add(new Articulo(id, nombre, codBarras, precio));
 	}
-	
-	public boolean eliminarArticulo(int id) throws Exception {
-		Articulo aux = traerArticulo(id);
-		if(aux!=null) {
-			throw new Exception ("Articulo inexistente");
-		}
-		return this.lstArticulo.remove(aux);
-	}
-
 
 	private Articulo traerArticulo(String codBarras) {		
 		
@@ -173,22 +164,13 @@ public class Comercio extends Actor{
 	public boolean agregarCarrito(LocalDate fecha, LocalTime hora, Cliente cliente,Entrega entrega) throws Exception {
 		
 		if(traerCarrito(cliente)!=null) {
-			throw new Exception ("El cliente posee carrito abierto.");
+			throw new Exception ("El cliente no existe/ o posee carrito abierto.");
 		}		
 		int id = 1;
 		if(this.lstCarrito.size()>0) {
 			id = this.lstCarrito.get(this.lstCarrito.size()-1).getId()+1;
 		}
 		return this.lstCarrito.add(new Carrito(id, fecha, hora, cliente, entrega));
-	}
-	
-	
-	public boolean eliminarCarrito(int id) throws Exception{	
-		Carrito aux = traerCarrito(id);
-		if(aux==null) {
-			throw new Exception ("No existe el carrito.");
-		}
-		return this.lstCarrito.remove(aux);
 	}
 	
 	public Carrito traerCarrito(int id) {
