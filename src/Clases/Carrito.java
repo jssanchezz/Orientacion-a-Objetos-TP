@@ -18,7 +18,7 @@ public class Carrito {
 	
 	//Constructor
 	
-	public Carrito(int id, LocalDate fecha, LocalTime hora, Cliente cliente) {
+	public Carrito(int id, LocalDate fecha, LocalTime hora, Cliente cliente, Entrega entrega) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -27,12 +27,6 @@ public class Carrito {
 		this.descuento = 0;
 		this.cliente = cliente;
 		this.lstItemCarrito = new ArrayList<ItemCarrito>();
-		this.entrega = null;
-	}
-	
-	public Carrito(int id, LocalDate fecha, LocalTime hora, Cliente cliente, Entrega entrega) {
-		
-		this(id, fecha, hora, cliente);
 		this.entrega = entrega;
 	}
 	
