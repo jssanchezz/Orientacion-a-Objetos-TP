@@ -23,18 +23,14 @@ public class TestAlmacenGranate {
 	public static void main(String[] args) {
 	
 		Comercio miComercio = null;
-		Entrega envioPaCasa = new Envio(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 30), LocalTime.of(13, 00), null);
-		Entrega retiro1 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 45));
-		Entrega retiro2 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(13, 30));
-		List<Turno> Turnos = new ArrayList<Turno>();
-		List<LocalTime> Horas = new ArrayList<LocalTime>();
+		
 		
 
 		// CASO DE USO: CREAR COMERCIO -> Se crea miComercio correctamente, miComercio 2
 		// contiene cuit invalido y lanza excepcion
 		System.out.println("--->Escenario 1.A: Se crea el Comercio<---");
 		try {
-			miComercio = new Comercio(2, "Super Pepe", "@gmail.com", "1122554466", 30610252334l, 200, 53, 2, 6, 25, new Ubicacion(-34.736039, -58.391270));
+			miComercio = new Comercio(2, "Super Pepe", "@gmail.com", "1122554466", 30610252334l, 200, 53, 7, 15, 25, new Ubicacion(-34.736039, -58.391270));
 			Comercio miComercio2 = new Comercio(2, "Invalida", "@gmail.com", "1234567890", 33123456l, 300, 23, 2, 6, 25,new Ubicacion(34.79, 58.37));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -90,21 +86,25 @@ public class TestAlmacenGranate {
 		// el cliente pedro contiene dni invalido y lanza excepcion
 		Cliente juan = null;
 		Cliente rolando = null;
+		Cliente rocio = null;
 
 		try {
 			System.out.println(
 					"--->Escenario 3.A: Se crea un cliente con datos validos[Juan] y otros con datos invalidos[Pedro]<---");
-			juan = new Cliente(3, "Sanchez", "Juan", "@gmail.com", "1111111111", 38355972l, new Ubicacion(-34.800499, -58.388777));
-			rolando = new Cliente(4, "Rapali", "Rolando", "@gmail.com", "1111111111", 17252301l, new Ubicacion(-34.80, 12.87));
+			juan = new Cliente(3, "Sanchez", "Juan", "@gmail.com", "1111111111", 37608935l, new Ubicacion(-34.800499, -58.388777));
+			rolando = new Cliente(4, "Rapali", "Rolando", "@gmail.com", "1111111111", 38355972l, new Ubicacion(-34.80, 12.87));
+			rocio = new Cliente(5, "Trinidad", "Rocio", "@gmail.com", "1111111111", 40291447l, new Ubicacion(-40.5, 10.5));
 			Cliente pedro = new Cliente(1, "Gomez", "Pedro", "@gmail.com", "1111111111", 1234l, new Ubicacion(-34.80, 12.87));
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
+		Entrega envioPaCasa = new Envio(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 30), LocalTime.of(13, 00), null);
+		Entrega retiro1 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), true, LocalTime.of(12, 45));
+		Entrega retiro2 = new RetiroLocal(3, LocalDate.of(2020, 10, 11), false, LocalTime.of(13, 30));
 		((Envio)envioPaCasa).setUbicacion(juan.getContacto().getUbicacion());
-
-				
+	
 
 		System.out.println("--->Fin del caso de uso:Crear cliente<---\n");
 		// CASO DE USO: AGREGAR CARRITO
@@ -114,9 +114,10 @@ public class TestAlmacenGranate {
 		try {
 			System.out.println(
 					"--->Escenario 4.A: Se intenta agregar un carrito nuevo a un cliente que tiene un carrito abierto<---");
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, envioPaCasa);
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), rolando, envioPaCasa);
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, envioPaCasa);
+			miComercio.agregarCarrito(LocalDate.of(2020, 10, 11), LocalTime.now(), juan, envioPaCasa);
+			miComercio.agregarCarrito(LocalDate.of(2020, 10, 11), LocalTime.now(), rolando, retiro1);
+			miComercio.agregarCarrito(LocalDate.of(2020, 10, 11), LocalTime.now(), rocio, retiro2);
+			miComercio.agregarCarrito(LocalDate.of(2020, 10, 11), LocalTime.now(), juan, envioPaCasa);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -130,7 +131,7 @@ public class TestAlmacenGranate {
 		try {
 			System.out.println(
 					"--->Escenario 4.B: Crea un nuevo carrito para el cliente una vez que este cierra el que tiene<---");
-			miComercio.agregarCarrito(LocalDate.now(), LocalTime.now(), juan, retiro1);
+			miComercio.agregarCarrito(LocalDate.of(2020, 10, 11), LocalTime.now(), juan, envioPaCasa);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -185,16 +186,35 @@ public class TestAlmacenGranate {
 		}
 		System.out.println("--->Fin del caso de uso:Sacar del Carrito<---\n");
 		// CASO DE USO: CERRAR CARRITO
-
 		try {
-			System.out.println(
-					"--->Escenario 6.A: Se realiza el cierre del carrito y se pasa a facturar el precio total<---");
+			System.out.println("--->Se cargan los carritos<---");
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(1), 3);
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(2), 6);
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(3), 1);
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(4), 1);
 			miComercio.traerCarrito(2).agregar(miComercio.traerArticulo(5), 2);
+			
+			miComercio.traerCarrito(3).agregar(miComercio.traerArticulo(1), 3);
+			miComercio.traerCarrito(3).agregar(miComercio.traerArticulo(2), 6);
+			miComercio.traerCarrito(3).agregar(miComercio.traerArticulo(3), 1);
+			miComercio.traerCarrito(3).agregar(miComercio.traerArticulo(4), 1);
+			miComercio.traerCarrito(3).agregar(miComercio.traerArticulo(5), 2);
+			
+			miComercio.traerCarrito(4).agregar(miComercio.traerArticulo(1), 4);
+			miComercio.traerCarrito(4).agregar(miComercio.traerArticulo(2), 2);
+			miComercio.traerCarrito(4).agregar(miComercio.traerArticulo(3), 3);
+			miComercio.traerCarrito(4).agregar(miComercio.traerArticulo(4), 2);
+			miComercio.traerCarrito(4).agregar(miComercio.traerArticulo(5), 1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			System.out.println(
+					"--->Escenario 6.A: Se realiza el cierre del carrito y se pasa a facturar el precio total<---");
 			miComercio.cobrarCarrito(2);
+			miComercio.cobrarCarrito(3);
+			miComercio.cobrarCarrito(4);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -202,37 +222,41 @@ public class TestAlmacenGranate {
 		miComercio.imprimirCarritos();
 		// Probamos el ticket
 		try {
-			System.out.println(
-					"--->Escenario 6.B: Se imprime el ticket total de la compra con los descuentos aplicados<---");
+			System.out.println("--->Escenario 6.B.1: Se imprime el ticket total de la compra de (Rocio) con los descuentos aplicados -Siendo mayor el descuento aplicado por dia- <---");
 			miComercio.traerCarrito(2).mostrarTicket();
+			System.out.println("--->Escenario 6.B.2: Se imprime el ticket total de la compra de (Rolando) con los descuentos aplicados -Siendo mayor el descuento aplicado por efectivo- <---");
+			miComercio.traerCarrito(3).mostrarTicket();
+			System.out.println("--->Escenario 6.B.3: Se imprime el ticket total de la compra de (Juan) con los descuentos aplicados y un envio <---");
+			miComercio.traerCarrito(4).mostrarTicket();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 		miComercio.getLstDiaRetiro().add(new DiaRetiro(0,7,LocalTime.of(10, 00), LocalTime.of(15, 00),15));
 		// El carrito ya esta cerrado, lanza excepcion
+		System.out.println("--->Escenario 6.C: Se intenta cobrar otra vez a alguien que ya ha sido cobrado<---");
 		try {
-			System.out.println("--->Escenario 6.C: Se intenta cobrar otra vez a alguien que ya ha sido cobrado<---");
 			miComercio.cobrarCarrito(juan);
+			
+			miComercio.cobrarCarrito(rolando);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("--->Fin del caso de uso:Cerrar carrito<---");
+		System.out.println("--->Fin del caso de uso:Cerrar carrito<---\n");
+		
+		List<Turno> Turnos = new ArrayList<Turno>();
+
+		// CASO DE USO: Generar agenda
 		try {
-			Horas = miComercio.traerHoraRetiro(LocalDate.of(2020, 10, 11));
-			System.out.println("--------");
-			for (LocalTime h : Horas) {
-				System.out.println("--" + h);
-			}
-			System.out.println("--------");
+			System.out.println("--->Escenario 7.A:Se genera una agenda con los turnos en el dia de retiro actual<---");
 			Turnos = miComercio.generarAgenda(LocalDate.of(2020, 10, 11));
 			for (Turno t : Turnos) {
-				System.out.println("--" + t);
+				System.out.println(t);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-			
+		System.out.println("--->Fin del caso de uso:Generar agenda<---\n");	
 	}
 }

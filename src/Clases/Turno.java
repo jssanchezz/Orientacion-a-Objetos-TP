@@ -43,7 +43,7 @@ public class Turno {
 
 	@Override
 	public String toString() {
-		return "Turno [dia=" + dia + ", hora=" + hora + ", ocupado=" + ocupado + "]";
+		return "Turnos de la fecha: " + dia + ", hora: " + hora + ", El turno esta ocupado? " + ocupado;
 	}
 	
 }

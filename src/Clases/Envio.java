@@ -71,7 +71,6 @@ public class Envio extends Entrega {
 		double costoTotal = 0;
 		double distancia = Envio.distanCoord(lat1,lng1,this.ubicacion.getLatitud(),this.ubicacion.getLongitud());
 		distancia = Math.round(distancia*100)/100.0d;
-		System.out.println("Distancia: "+ distancia);
 		costoTotal = costoFijo + (distancia*costoPorKm);
 		this.setCosto(costoTotal);
 	}

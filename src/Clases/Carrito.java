@@ -201,7 +201,7 @@ public class Carrito {
 		total -= descuento;
 		if(this.entrega instanceof Envio) {
 			total += ((Envio)this.entrega).getCosto();
-			System.out.println("Costo: "+ ((Envio)this.entrega).getCosto());
+			System.out.println("Costo del envio: $"+ ((Envio)this.entrega).getCosto());
 		}
 		return total;
 	}
@@ -222,7 +222,7 @@ public class Carrito {
 	public void mostrarTicket() {
 		System.out.println("El Carrito es el numero: " + this.getId());
 		this.imprimirListadoItems();
-		System.out.println("Este es el descuento del precio total: $"+ this.getDescuento() + "\nEste es el total: $" + this.totalAPagarCarrito());
+		System.out.println("Este es el descuento del precio total: $"+ this.getDescuento() + "\nEste es el total(Con el precio del envio incluido): $" + this.totalAPagarCarrito());
 	}
 
 }
